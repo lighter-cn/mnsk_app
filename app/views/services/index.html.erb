@@ -1,1 +1,57 @@
-<h1>servises#index</h1>
+<%# header %>
+<div class="header-wrapper container-fluid">
+  <header class="container d-flex justify-content-between align-items-center">
+    <%= image_tag "logo.png", class:"logo-img" %>
+    <div>
+      <button type="button" class="btn btn-outline-primary">sign in</button>
+      <button type="button" class="btn btn-outline-success">log in</button>
+    </div>
+  </header>
+</div>
+
+<%# main %>
+<div class="main-wrapper container">
+  <div class="about-mnsk">
+    <h2>About MNSC</h2>
+    <p>
+      MNSK（みんなのサブスク）は、誰でも自由にサービスをサブスクリプションとして提供、<br>
+      あるいは購入できるプラットフォームです。<br>
+      登録は簡単！すぐにサービスを開始することも購入することも可能です。<br>
+      お気に入りのサービスを見つけて早速使ってみましょう！
+    </p>
+    <h3>MNSKの特徴</h3>
+    <ul>
+      <li>3分で登録完了</li>
+      <li>すぐに出品できる手軽さ</li>
+      <li>その場で購入できる使いやすさ</li>
+    </ul>
+  </div>
+  <div class="subscriptions">
+    <h2>Subscriptions</h2>
+    <div class="d-flex flex-wrap">
+
+      <% 10.times do%>
+      <!-- card 1 -->
+      <div class="card col-12 col-sm-6 col-md-4 col-xl-3" style="width: 18rem;">
+        <%= image_tag "cover.png", class:"card-img" %>
+        <div class="card-body">
+          <h5 class="card-title">subscription name</h5>
+          <span class="badge badge-pill badge-warning">¥12,345</span>
+        </div>
+      </div>
+      <!-- end -->
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+<%# footer %>
+<div class="footer-wrapper container-fruid">
+  <footer class="container d-flex align-items-center">
+    <div>
+      <h1>footer</h1>
+      <p>(c)MNSC.app</p>
+    </div>
+  </footer>
+</div>
