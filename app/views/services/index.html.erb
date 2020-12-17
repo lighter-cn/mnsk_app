@@ -1,20 +1,4 @@
-<%# header %>
-<div class="header-wrapper container-fluid">
-  <header class="container d-flex justify-content-between align-items-center">
-    <%= image_tag "logo.png", class:"logo-img" %>
-    <div>
-      <% if user_signed_in? %>
-        <span class="user-name"><%= @user.name %></span>
-        <a href="/users/sign_out" rel="nofollow" data-method="delete"><button type="button" class="btn btn-outline-danger">log out</button></a>
-      <% else %>
-        <a href="/users/sign_up" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-primary">sign up</button></a>
-        <a href="/users/sign_in" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-success">log in</button></a>
-      <% end %>
-
-      
-    </div>
-  </header>
-</div>
+<%= render "shared/header" %>
 
 <%# main %>
 <div class="main-wrapper container">
@@ -53,12 +37,4 @@
   </div>
 </div>
 
-<%# footer %>
-<div class="footer-wrapper container-fruid">
-  <footer class="container d-flex align-items-center">
-    <div>
-      <h1>footer</h1>
-      <p>(c)MNSC.app</p>
-    </div>
-  </footer>
-</div>
+<%= render "shared/footer" %>
