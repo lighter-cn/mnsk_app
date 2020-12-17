@@ -23,6 +23,11 @@ header {
   height: 72px;
 }
 
+.user-name {
+  margin-right: 20px;
+  font-size: 24px;
+}
+
 /* footer **************************************/
 .footer-wrapper {
 }

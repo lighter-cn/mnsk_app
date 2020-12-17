@@ -5,28 +5,48 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   @user = User.new
-  # end
+  def new
+    @user = User.new
+  end
 
   # POST /resource
-  # def create
-    # @client = Client.new(client_params)
-    # binding.pry
-    # if @client.valid?
-    #   @client.save
-    #   redirect_to root_path
-    # else
-    #   render action: :new
-    # end
-  #   @user.save
-  # end
+  def create
+    @user = User.new(sign_up_params)
+    unless @user.valid?
+      render :new and return
+    end
+    session["devise.regist_data"] = {user: @user.attributes}
+    session["devise.regist_data"][:user]["password"] = params[:user][:password]
+    @card = @user.build_card
+    render :new_card
+  end
 
-  private
+  def create_card
+    @user = User.new(session["devise.regist_data"]["user"])
+    @user.save
+    session["devise.regist_data"]["user"].clear
 
-  # def client_params
-  #   params.require(:client).permit(:name, :birthday, :email, :encrypted_password, :card_token)
-  # end
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
+    customer = Payjp::Customer.create(
+      description: 'test', 
+      card: params[:card_token] 
+    )
+ 
+    card = Card.new( # トークン化されたカード情報を保存する
+      card_token: params[:card_token], # カードトークン
+      customer_token: customer.id, # 顧客トークン
+      user_id: @user.id # ログインしているユーザー
+    )
+
+    unless card.valid?
+      render :new_card and return
+    end
+
+    card.save
+
+    sign_in(root_path, @user)
+
+  end
 
   # GET /resource/edit
   # def edit
