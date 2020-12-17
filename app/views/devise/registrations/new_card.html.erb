@@ -1,26 +1,25 @@
-<%= form_with  url: card_path, id: 'registration-form', class: 'card-form',local: true do |f| %>
-  <div class="Cardpage">
-    <h1>カード登録</h1>
-  </div><br>
-  <div class='form-wrap'>
-    <%= f.label :number, "【カード番号】" %>
-    <%= f.text_field :number, class:"number", placeholder:"カード番号(半角英数字)", maxlength:"16" %>
-  </div>
-  <div class='form-wrap'>
-    <%= f.label :cvc ,"【ＣＶＣ】" %>
-    <%= f.text_field :cvc, class:"cvc", placeholder:"カード背面にある3桁の番号", maxlength:"4" %>
-  </div>
-  <div class='form-wrap'>
-  <br>
-    <p>【有効期限】</p>
-    <div class='input-expiration-date-wrap'>
-      <%= f.select :exp_month, 1..12, {include_blank: "---"}, class: "exp_month" %>
-      <p>月</p>
-      <%= f.select :exp_year, 20..25, {include_blank: "---"}, class: "exp_year" %>
-      <p>年</p>
+<div class="container registration">
+  <%= form_with  url: card_path, id: 'registration-form', class: 'registration-form',local: true do |f| %>
+    <h2>Card Info</h2>
+    <div class="field">
+      <%= f.label :number, "card number" %><br />
+      <%= f.text_field :number, class:"number", placeholder:"カード番号(半角英数字)", maxlength:"16" %>
     </div>
-  </div>
-  <%= f.submit "登録する" , class:"button" %>
-<% end %>
-
-<%= render "devise/shared/links" %>
+    <div class="field">
+      <%= f.label :cvc ,"cvc" %><br />
+      <%= f.text_field :cvc, class:"cvc", placeholder:"カード背面にある3桁の番号", maxlength:"4" %>
+    </div>
+    <div class="field">
+      <p>effective date</p>
+      <div class='input-expiration-date-wrap'>
+        <%= f.select :exp_month, 1..12, {include_blank: "---"}, class: "exp_month" %>
+        <span>month</span>
+        <%= f.select :exp_year, 20..25, {include_blank: "---"}, class: "exp_year" %>
+        <span>year</span>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit "登録する" , class:"button" %>
+    </div>
+  <% end %>
+</div>

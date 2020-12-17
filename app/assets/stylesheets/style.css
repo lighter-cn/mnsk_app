@@ -82,3 +82,30 @@ footer div {
 .card-body{
   padding: 20px 0;
 }
+
+/* registration ********************************/
+.registration {
+  padding: 60px 0;
+  text-align: center;
+}
+.registration h2 {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+.registration label {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+.registration .field {
+  margin-bottom: 16px;
+}
+.registration input {
+  width: 200px;
+}
+.actions {
+  margin: 32px 0 16px;
+}
+.actions input {width: 100px;}
+.check input {
+  width: 10px
+}
