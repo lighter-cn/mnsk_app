@@ -5,48 +5,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  def new
-    @user = User.new
-  end
+  # def new
+  #   super
+  # end
 
   # POST /resource
-  def create
-    @user = User.new(sign_up_params)
-    unless @user.valid?
-      render :new and return
-    end
-    session["devise.regist_data"] = {user: @user.attributes}
-    session["devise.regist_data"][:user]["password"] = params[:user][:password]
-    @card = @user.build_card
-    render :new_card
-  end
-
-  def create_card
-    @user = User.new(session["devise.regist_data"]["user"])
-    @user.save
-    session["devise.regist_data"]["user"].clear
-
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
-    customer = Payjp::Customer.create(
-      description: 'test', 
-      card: params[:card_token] 
-    )
- 
-    card = Card.new( # トークン化されたカード情報を保存する
-      card_token: params[:card_token], # カードトークン
-      customer_token: customer.id, # 顧客トークン
-      user_id: @user.id # ログインしているユーザー
-    )
-
-    unless card.valid?
-      render :new_card and return
-    end
-
-    card.save
-
-    sign_in(root_path, @user)
-
-  end
+  # def create
+  #   super
+  # end
 
   # GET /resource/edit
   # def edit
@@ -93,4 +59,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  def after_sign_up_path_for(resource)
+    new_card_path
+  end
 end

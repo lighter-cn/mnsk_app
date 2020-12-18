@@ -1,4 +1,4 @@
-if (document.URL.match( /users/ )) {
+if (document.URL.match( /card/ )) {
   const cardRegistration = () => {
     Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
     const form = document.getElementById("registration-form");

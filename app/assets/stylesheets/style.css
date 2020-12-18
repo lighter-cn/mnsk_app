@@ -99,6 +99,9 @@ footer div {
 .registration .field {
   margin-bottom: 16px;
 }
+.registration .field p{
+  margin-bottom: 4px;
+}
 .registration input {
   width: 200px;
 }
@@ -108,4 +111,12 @@ footer div {
 .actions input {width: 100px;}
 .check input {
   width: 10px
+}
+.exp_month,
+.exp_year {
+  width: 80px;
+}
+.card_limit {
+  width: 200px;
+  margin: 0 auto;
 }

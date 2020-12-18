@@ -1,2 +1,29 @@
-<h1>Cards#new</h1>
-<p>Find me in app/views/cards/new.html.erb</p>
+<div class="container registration">
+  <%= form_with  url: cards_path, id: 'registration-form', class: 'registration-form',local: true do |f| %>
+    <h2>Card Info</h2>
+    <div class='field'>
+      <%= f.label :number, "カード番号" %><br>
+      <%= f.text_field :number, class:"number", placeholder:"カード番号(半角英数)", maxlength:"16" %>
+    </div>
+    <div class='field'>
+      <%= f.label :cvc ,"cvc" %><br>
+      <%= f.text_field :cvc, class:"cvc", placeholder:"カード背面の3桁の番号", maxlength:"4" %>
+    </div>
+    <div class='field'>
+      <p>有効期限</p>
+      <div class="d-flex justify-content-between card_limit">
+        <div>
+          <%= f.select :exp_month, 1..12, {include_blank: "---"}, class: "exp_month" %>
+          <p>月</p>
+        </div>
+        <div>
+          <%= f.select :exp_year, 20..25, {include_blank: "---"}, class: "exp_year" %>
+          <p>年</p>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit "登録する" , class:"button" %>
+    </div>
+  <% end %>
+</div>
