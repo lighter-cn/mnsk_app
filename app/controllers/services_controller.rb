@@ -7,6 +7,8 @@ class ServicesController < ApplicationController
 
   def new
     pull_user
+
+    @service = Service.new
   end
 
   private

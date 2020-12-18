@@ -148,3 +148,13 @@ footer div {
 .user .link:hover {
   color: #06b45d;
 }
+
+/* service ************************************/
+/* new */
+.service-new {
+  text-align: center;
+  padding-bottom: 60px;
+}
+.service-new .field {
+  margin-bottom: 20px;
+}
