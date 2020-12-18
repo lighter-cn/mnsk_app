@@ -1,6 +1,7 @@
 /* common settings *****************************/
 html * {
   color: #777;
+  font-family: 'Kosugi Maru', sans-serif;
 }
 h2 {font-size: 48px}
 h3 {font-size: 40px}
@@ -72,6 +73,10 @@ footer div {
 
 /* subscriptions */
 .subscriptions h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.sb {
   text-align: center;
   margin-bottom: 30px;
 }
