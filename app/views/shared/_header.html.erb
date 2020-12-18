@@ -4,7 +4,7 @@
     <a href="/"><%= image_tag "logo.png", class:"logo-img" %></a>
     <div>
       <% if user_signed_in? %>
-        <span class="user-name"><%= @user.name %></span>
+        <%= link_to @user.name, user_path(current_user) %>
         <a href="/users/sign_out" rel="nofollow" data-method="delete"><button type="button" class="btn btn-outline-danger">log out</button></a>
       <% else %>
         <a href="/users/sign_up" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-primary">sign up</button></a>

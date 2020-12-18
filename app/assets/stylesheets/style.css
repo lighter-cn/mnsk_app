@@ -120,3 +120,22 @@ footer div {
   width: 200px;
   margin: 0 auto;
 }
+
+/* user-info ***********************************/
+.user {
+  padding-bottom: 60px;
+  text-align: center;
+}
+.user h2,
+.user h3 {
+  margin-bottom: 30px;
+}
+.user-info {
+  margin-bottom: 45px;
+}
+.user .link {
+  color: #c725c7;
+}
+.user .link:hover {
+  color: #06b45d;
+}
