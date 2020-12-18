@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   }
   root 'services#index'
   resources :cards, only: [:new, :create]
+  resources :users, only: [:show, :edit, :update]
 end

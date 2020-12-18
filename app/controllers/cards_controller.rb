@@ -1,4 +1,6 @@
 class CardsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @user = User.find(current_user.id)
   end
@@ -9,17 +11,16 @@ class CardsController < ApplicationController
     description: 'test', 
     card: params[:card_token] 
    )
-
     card = Card.new(
       card_token: params[:card_token],
       customer_token: customer.id,
       user_id: current_user.id
    )
-
     if card.save
       redirect_to root_path
     else
       redirect_to "new"
     end
   end
+
 end
