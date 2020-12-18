@@ -9,8 +9,12 @@
     </div>
     <div class="card-info">
       <h3>Credit Card</h3>
-      <% if @card %>
-        <p>you've already registered.</p>
+      <% if @card.present? %>
+        <p>card number</p>
+        <p><%= "**** **** **** " + @card[:last4] %></p>
+        <p>limit</p>
+        <p><%= @card[:exp_month] %> / <%= @card[:exp_year] %></p>
+
       <% else %>
         <p>Not register yet.</p>
         <%= link_to "Please resigter from here.", new_card_path, class: "link" %>
