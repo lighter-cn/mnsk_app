@@ -1,1 +1,38 @@
-#show
+<div class="main-wrapper container">
+  <div class="service-show">
+    <h2><%= @service.service_name %></h2>
+    <%# 画像 / なければサンプル画像 %>
+    <p>カテゴリー：<%= @service.category.name %></p>
+    <p>内容：<%= @service.explanation %></p>
+    <p>月額：<%= @service.price %></p>
+    <p>出品者：<%= @service.user.name %></p>
+  </div>
+
+  <div class="service-button">
+    <%# ボタン出し分け %>
+    <%# ログイン済みなら %>
+    <% if user_signed_in? %>
+      <p>ボタン</p>
+      <%# 出品者なら %>
+      <% if current_user.id == @service.user_id %>
+        <p>編集</p>
+        <%# 購入ユーザーいない場合 %>
+          <%# 削除ボタン %>
+        <%# それ以外 %>
+          <%# 停止ボタン %>
+      <%# 出品者以外なら %>
+      <% else %>
+        <%# 未購入なら %>
+          <%# 購入ボタン %>
+        <%# 購入済みなら %>
+          <%# QRボタン %>
+          <%# 停止ボタン %>
+      <% end %>
+    <%# ログインしていなければ %>
+    <% else %>
+      <a href="/users/sign_up" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-primary">sign up</button></a>
+      <a href="/users/sign_in" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-success">log in</button></a>
+    <% end %>
+  </div>
+
+</div>
