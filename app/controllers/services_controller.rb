@@ -1,22 +1,23 @@
 class ServicesController < ApplicationController
-  before_action :authenticate_user!, except: [:index] # 後でshowも足す
-  before_action :register_card?, except: [:index] # 後でshowも足す
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :pull_user
+  before_action :register_card?, except: [:index, :show]
   
   def index
-    pull_user
+  end
+
+  def show
+    @service = Service.find(params[:id])
   end
 
   def new
-    pull_user
-
     @service = Service.new
   end
 
   def create
-    pull_user
     @service = Service.new(service_params)
     if @service.save
-      plan_name = "#{@service.service_name}_#{@service.user_id}"
+      plan_name = "#{@service.service_name}_#{@service.user_id}_#{@service.created_at}"
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Plan.create(
         name: plan_name,

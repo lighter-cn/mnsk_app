@@ -1,0 +1,74 @@
+<div class="main-wrapper container">
+  <div class="service-show">
+    <h2><%= @service.service_name %></h2>
+    <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <% count = 0 %>
+        <% @service.images.each do %>
+          <li 
+            data-target="#carouselIndicators"
+            data-slide-to="<%= count %>" 
+            <% if count == 0 %>
+              class="active"
+            <% end %>
+            <% count += 1 %>
+          ></li>
+        <% end %>
+      </ol>
+      <div class="carousel-inner">
+          <% count_image = 0 %>
+          <% @service.images.each do |image| %>
+            <% if count_image == 0 %>
+            <div class="carousel-item active">
+            <% else %>
+            <div class="carousel-item">
+            <% end %>
+              <%= image_tag image, class:'images card-img"' %>
+            </div>
+            <% count_image += 1 %>
+          <% end %>
+      </div>
+      <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    <p>カテゴリー：<%= @service.category.name %></p>
+    <p>内容：<%= @service.explanation %></p>
+    <p>月額：¥<%= @service.price %></p>
+    <p>出品者：<%= @service.user.name %></p>
+  </div>
+  </div>
+
+  <div class="service-button">
+    <%# ボタン出し分け %>
+    <%# ログイン済みなら %>
+    <% if user_signed_in? %>
+      <p>ボタン</p>
+      <%# 出品者なら %>
+      <% if current_user.id == @service.user_id %>
+        <p>編集</p>
+        <%# 購入ユーザーいない場合 %>
+          <%# 削除ボタン %>
+        <%# それ以外 %>
+          <%# 停止ボタン %>
+      <%# 出品者以外なら %>
+      <% else %>
+        <%# 未購入なら %>
+          <%# 購入ボタン %>
+        <%# 購入済みなら %>
+          <%# QRボタン %>
+          <%# 停止ボタン %>
+      <% end %>
+    <%# ログインしていなければ %>
+    <% else %>
+      <a href="/users/sign_up" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-primary">sign up</button></a>
+      <a href="/users/sign_in" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-success">log in</button></a>
+    <% end %>
+  </div>
+
+</div>
