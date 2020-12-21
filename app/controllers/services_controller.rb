@@ -15,7 +15,7 @@ class ServicesController < ApplicationController
   end
 
   def create
-    plan_name = "#{params[:service][:service_name]}_#{params[:service][:user_id]}_#{get_data}"
+    plan_name = "#{params[:service][:service_name]}_#{current_user.id}_#{get_data}"
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     plan = Payjp::Plan.create(
       name: plan_name,
