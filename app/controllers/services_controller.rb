@@ -13,8 +13,17 @@ class ServicesController < ApplicationController
   end
 
   def create
+    pull_user
     @service = Service.new(service_params)
     if @service.save
+      plan_name = "#{@service.service_name}_#{@service.user_id}"
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp::Plan.create(
+        name: plan_name,
+        amount: @service.price,
+        currency: 'jpy',
+        interval: 'month'
+      )
       redirect_to root_path
     else
       render :new

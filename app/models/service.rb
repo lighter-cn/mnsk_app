@@ -6,6 +6,7 @@ class Service < ApplicationRecord
 
   with_options presence: true do
     validates :user_id
+    validates :service_name, uniqueness: true
     validates :price
     validates :explanation
     validates :category_id, numericality: { other_than: 1 }
