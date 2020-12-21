@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2020_12_18_062614) do
     t.integer "price", null: false
     t.text "explanation", null: false
     t.string "service_status", null: false
+    t.string "service_id", null: false
     t.integer "category_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false

@@ -1,7 +1,7 @@
 class ServicesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :pull_user
-  before_action :register_card?, except: [:index, :show]
+  before_action :register_card?, except: [:index, :show, :edit, :update]
   
   def index
   end
@@ -15,16 +15,16 @@ class ServicesController < ApplicationController
   end
 
   def create
-    @service = Service.new(service_params)
+    plan_name = "#{params[:service][:service_name]}_#{params[:service][:user_id]}_#{get_data}"
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    plan = Payjp::Plan.create(
+      name: plan_name,
+      amount: params[:service][:price],
+      currency: 'jpy',
+      interval: 'month'
+    )
+    @service = Service.new(service_params(plan.id))
     if @service.save
-      plan_name = "#{@service.service_name}_#{@service.user_id}_#{@service.created_at}"
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      Payjp::Plan.create(
-        name: plan_name,
-        amount: @service.price,
-        currency: 'jpy',
-        interval: 'month'
-      )
       redirect_to root_path
     else
       render :new
@@ -38,6 +38,13 @@ class ServicesController < ApplicationController
 
   def update
     is_owner?
+    @service = Service.find(params[:id])
+    if @service.update
+      plan_name = "#{@service.service_name}_#{@service.user_id}_#{@service.created_at}"
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    else
+      render :update
+    end
   end
 
   private
@@ -48,8 +55,8 @@ class ServicesController < ApplicationController
     end
   end
 
-  def service_params
-    params.require(:service).permit(:service_name, :price, :explanation, :category_id, images: []).merge(service_status: "open", user_id: current_user.id)
+  def service_params plan_id
+    params.require(:service).permit(:service_name, :price, :explanation, :category_id, images: []).merge(service_status: "open", service_id: plan_id, user_id: current_user.id)
   end
 
   def register_card?
@@ -58,5 +65,10 @@ class ServicesController < ApplicationController
 
   def is_owner?
     redirect_to root_path unless current_user.id == @service.user_id
+  end
+
+  def get_data
+    date = DateTime.now
+    return date
   end
 end
