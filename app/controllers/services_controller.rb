@@ -1,5 +1,6 @@
 class ServicesController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index] # 後でshowも足す
+  before_action :register_card?, except: [:index] # 後でshowも足す
   
   def index
     pull_user
@@ -30,5 +31,9 @@ class ServicesController < ApplicationController
 
   def service_params
     params.require(:service).permit(:service_name, :price, :explanation, :category_id, images: []).merge(service_status: "open", user_id: current_user.id)
+  end
+
+  def register_card?
+    redirect_to new_card_path and return unless current_user.card.present?
   end
 end
