@@ -4,5 +4,10 @@ class Service < ApplicationRecord
   belongs_to :user
   has_many_attached :images
 
-  validates :category_id, numericality: { other_than: 1 }
+  with_options presence: true do
+    validates :user_id
+    validates :price
+    validates :explanation
+    validates :category_id, numericality: { other_than: 1 }
+  end
 end
