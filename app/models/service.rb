@@ -10,5 +10,6 @@ class Service < ApplicationRecord
     validates :price
     validates :explanation
     validates :category_id, numericality: { other_than: 1 }
+    validates :images ,length: { maximum: 10 }
   end
 end
