@@ -162,6 +162,22 @@ footer div {
   max-width: 200px;
   height: auto;
 }
+/* edit */
+.service-edit {
+  text-align: center;
+  padding-bottom: 60px;
+}
+.service-edit .field {
+  margin-bottom: 20px;
+}
+#image-list img {
+  max-width: 200px;
+  height: auto;
+}
+.service-images {
+  max-width: 200px;
+  height: auto;
+}
 /* show */
 .service-show {
   text-align: center;

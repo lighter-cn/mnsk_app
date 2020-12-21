@@ -2,7 +2,6 @@ class ServicesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :pull_user
   before_action :register_card?, except: [:index, :show]
-  before_action :is_owner?, only[:edit, :update]
   
   def index
   end
@@ -34,9 +33,11 @@ class ServicesController < ApplicationController
 
   def edit
     @service = Service.find(params[:id])
+    is_owner?
   end
 
   def update
+    is_owner?
   end
 
   private
