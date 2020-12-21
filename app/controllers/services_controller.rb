@@ -37,11 +37,10 @@ class ServicesController < ApplicationController
   end
 
   def update
-    is_owner?
     @service = Service.find(params[:id])
-    if @service.update
-      plan_name = "#{@service.service_name}_#{@service.user_id}_#{@service.created_at}"
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    is_owner?
+    if @service.update(service_params(@service.service_id))
+      redirect_to service_path(params[:id])
     else
       render :update
     end
