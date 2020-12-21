@@ -2,6 +2,7 @@ class ServicesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :pull_user
   before_action :register_card?, except: [:index, :show]
+  before_action :is_owner?, only[:edit, :update]
   
   def index
   end
@@ -31,6 +32,13 @@ class ServicesController < ApplicationController
     end
   end
 
+  def edit
+    @service = Service.find(params[:id])
+  end
+
+  def update
+  end
+
   private
 
   def pull_user
@@ -45,5 +53,9 @@ class ServicesController < ApplicationController
 
   def register_card?
     redirect_to new_card_path and return unless current_user.card.present?
+  end
+
+  def is_owner?
+    redirect_to root_path unless current_user.id == @service.user_id
   end
 end
