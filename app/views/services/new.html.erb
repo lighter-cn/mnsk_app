@@ -24,8 +24,13 @@
 
       <div class="field">
         <p>画像</p>
-        <%= f.file_field :images %><br>
+        <%= f.file_field :images, name: 'service[images][]', id: 'service_image' %>
+        <div id="image-list"></div>
       </div>
+
+      <% @service.images.each do |image| %>
+        <%= image_tag image, class: 'service-images' %>
+      <% end %>
 
       <div class="field">
         <%= f.submit '作成' %>
