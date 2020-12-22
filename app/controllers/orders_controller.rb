@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :is_owner?
   before_action :pull_user
-  before_action :already_buy?
+  before_action :already_buy?, except: :pause
 
   def new
     @service = Service.find(params[:service_id])
@@ -33,6 +33,28 @@ class OrdersController < ApplicationController
     else
       render :new
     end
+  end
+
+  # サブスクの停止処理
+  def pause
+    @service = Service.find(params[:service_id])
+    @order = Order.find_by user_id: current_user.id, service_id: params[:service_id]
+    # 購入しているサービスを取得
+    if @order != nil
+      # payjpの処理
+      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+      customer_token = current_user.card.customer_token
+      
+      # plan情報取得
+      @plan = Payjp::Plan.retrieve(@service.service_id)
+      # order情報取得
+      # sub = Payjp::Subscription.retrieve("sub_2b15f3f9670e3cc5517ea891a2e1")
+      # 停止メソッド実行
+      # sub.pause
+
+    end
+    # サービス詳細画面に遷移
+    # redirect_to service_path(params[:service_id])
   end
 
   private
