@@ -1,4 +1,4 @@
 FactoryBot.define do
-  factory :card do
+  factory :order do
   end
 end

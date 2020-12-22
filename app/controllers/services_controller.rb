@@ -2,12 +2,13 @@ class ServicesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :pull_user
   before_action :register_card?, except: [:index, :show, :edit, :update]
-  
+
   def index
   end
 
   def show
     @service = Service.find(params[:id])
+    @order = Order.find_by user_id: current_user.id, service_id: @service.id
   end
 
   def new
@@ -16,7 +17,7 @@ class ServicesController < ApplicationController
 
   def create
     plan_name = "#{params[:service][:service_name]}_#{current_user.id}_#{get_data}"
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     plan = Payjp::Plan.create(
       name: plan_name,
       amount: params[:service][:price],
@@ -49,13 +50,12 @@ class ServicesController < ApplicationController
   private
 
   def pull_user
-    if user_signed_in?
-      @user = User.find(current_user.id)
-    end
+    @user = User.find(current_user.id) if user_signed_in?
   end
 
-  def service_params plan_id
-    params.require(:service).permit(:service_name, :price, :explanation, :category_id, images: []).merge(service_status: "open", service_id: plan_id, user_id: current_user.id)
+  def service_params(plan_id)
+    params.require(:service).permit(:service_name, :price, :explanation, :category_id, images: []).merge(service_status: 'open',
+                                                                                                         service_id: plan_id, user_id: current_user.id)
   end
 
   def register_card?
@@ -67,7 +67,6 @@ class ServicesController < ApplicationController
   end
 
   def get_data
-    date = DateTime.now
-    return date
+    DateTime.now
   end
 end

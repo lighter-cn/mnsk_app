@@ -51,7 +51,7 @@
       <p>ボタン</p>
       <%# 出品者なら %>
       <% if current_user.id == @service.user_id %>
-        <%= link_to "編集する", edit_service_path(params[:id]), class: "edit-link"%>
+        <%= link_to "編集する", edit_service_path(params[:id]), class: "mnsk-link"%>
         <%# 購入ユーザーいない場合 %>
           <%# 削除ボタン %>
         <%# それ以外 %>
@@ -59,10 +59,16 @@
       <%# 出品者以外なら %>
       <% else %>
         <%# 未購入なら %>
-          <%# 購入ボタン %>
+        <% if @order != nil %>
         <%# 購入済みなら %>
           <%# QRボタン %>
+          <span>QR発行</span>
           <%# 停止ボタン %>
+          <span>停止</span>
+        <% else %>
+          <%# 購入ボタン %>
+          <%= link_to "購入する", new_service_order_path(params[:id]), class: "mnsk-link"%>
+        <% end %>
       <% end %>
     <%# ログインしていなければ %>
     <% else %>

@@ -205,3 +205,10 @@ footer div {
 .carousel-control-prev {
   filter: invert(100%);
 }
+
+/* order ***************************************/
+/* new */
+.order-new {
+  text-align: center;
+  padding-bottom: 60px;
+}
