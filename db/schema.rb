@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2020_12_22_023756) do
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "service_id", null: false
+    t.text "subscription", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["service_id"], name: "index_orders_on_service_id"
