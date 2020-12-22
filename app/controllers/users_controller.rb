@@ -1,15 +1,15 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :get_user, only: [:show,:edit, :update]
+  before_action :get_user, only: [:show, :edit, :update]
   def show
     # カード情報取得
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     card = Card.find_by(user_id: current_user.id)
 
     if card.present?
       customer = Payjp::Customer.retrieve(card.customer_token)
       @card = customer.cards.first
-    else 
+    else
       @card = nil
     end
   end
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     end
   end
 
-  private 
+  private
 
   def get_user
     @user = User.find(current_user.id)

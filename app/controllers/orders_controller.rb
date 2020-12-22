@@ -8,14 +8,14 @@ class OrdersController < ApplicationController
     @service = Service.find(params[:service_id])
     @order = Order.new
   end
-  
+
   def create
     # カード未所持のときのリダイレクト
     redirect_to new_card_path and return unless current_user.card.present?
 
     service = Service.find(params[:service_id])
     # payjpの処理
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     customer_token = current_user.card.customer_token
 
     # サブスクの購入
@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
       customer: customer_token,
       plan: service.service_id
     )
-    if sub.id != nil
+    if !sub.id.nil?
       @order = Order.new(
         user_id: current_user.id,
         service_id: params[:service_id]
@@ -38,23 +38,17 @@ class OrdersController < ApplicationController
   private
 
   def pull_user
-    if user_signed_in?
-      @user = User.find(current_user.id)
-    end
+    @user = User.find(current_user.id) if user_signed_in?
   end
 
   def is_owner?
     service = Service.find(params[:service_id])
-    if current_user.id == service.user_id
-      redirect_to service_path(params[:service_id])
-    end
+    redirect_to service_path(params[:service_id]) if current_user.id == service.user_id
   end
 
   def already_buy?
     service = Service.find(params[:service_id])
     order = Order.find_by user_id: current_user.id, service_id: service.id
-    if order != nil
-      redirect_to service_path(params[:service_id])
-    end
+    redirect_to service_path(params[:service_id]) unless order.nil?
   end
 end
