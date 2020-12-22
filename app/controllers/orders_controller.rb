@@ -26,7 +26,8 @@ class OrdersController < ApplicationController
     if !sub.id.nil?
       @order = Order.new(
         user_id: current_user.id,
-        service_id: params[:service_id]
+        service_id: params[:service_id],
+        subscription: sub.id
       )
       @order.save
       redirect_to service_path(params[:service_id])
