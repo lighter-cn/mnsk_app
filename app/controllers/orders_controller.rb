@@ -51,5 +51,10 @@ class OrdersController < ApplicationController
   end
 
   def already_buy?
+    service = Service.find(params[:service_id])
+    order = Order.find_by user_id: current_user.id, service_id: service.id
+    if order != nil
+      redirect_to service_path(params[:service_id])
+    end
   end
 end
