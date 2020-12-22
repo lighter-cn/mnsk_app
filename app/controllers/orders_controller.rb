@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
     @service = Service.find(params[:service_id])
     @order = Order.find_by user_id: current_user.id, service_id: params[:service_id]
     # 購入しているサービスを取得
-    if @order != nil
+    unless @order.nil?
       # payjpの処理
       Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       customer_token = current_user.card.customer_token
