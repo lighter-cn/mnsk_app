@@ -45,17 +45,11 @@ class OrdersController < ApplicationController
       # payjpの処理
       Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       customer_token = current_user.card.customer_token
-      
-      # plan情報取得
-      @plan = Payjp::Plan.retrieve(@service.service_id)
-      # order情報取得
-      # sub = Payjp::Subscription.retrieve("sub_2b15f3f9670e3cc5517ea891a2e1")
-      # 停止メソッド実行
-      # sub.pause
+
+      @sub = Payjp::Subscription.retrieve(@order.subscription)
+      @sub.pause
 
     end
-    # サービス詳細画面に遷移
-    # redirect_to service_path(params[:service_id])
   end
 
   private
