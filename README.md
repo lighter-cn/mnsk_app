@@ -40,6 +40,7 @@ Things you may want to cover:
 | price          | integer    | null: false                    |
 | explanation    | text       | null: false                    |
 | service_status | string     | null: false                    |
+| service_id     | text       | null: false                    |
 | category_id    | integer    | null: false                    |
 | user           | references | null: false, foreign_key: true |
 
@@ -52,10 +53,11 @@ Things you may want to cover:
 
 ## orders テーブル
 
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| user    | references | null: false, foreign_key: true |
-| service | references | null: false, foreign_key: true |
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| user         | references | null: false, foreign_key: true |
+| service      | references | null: false, foreign_key: true |
+| subscription | text       | null: false                    |
 
 ### Association
 
