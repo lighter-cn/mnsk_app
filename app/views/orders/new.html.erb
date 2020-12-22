@@ -5,6 +5,6 @@
     <p>カテゴリー：<%= @service.category.name %></p>
     <p>月額：¥<%= @service.price %></p>
     <p>このサブスクリプションを購入しますか？</p>
-    <%= link_to "購入", service_orders_path(params[:service_id]), class: "mnsk-link"%>
+    <%= link_to "購入", service_orders_path(params[:service_id]),method: :post, class: "mnsk-link"%>
   </div>
 </div>

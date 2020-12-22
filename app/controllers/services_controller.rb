@@ -8,6 +8,7 @@ class ServicesController < ApplicationController
 
   def show
     @service = Service.find(params[:id])
+    @order = Order.find_by user_id: current_user.id, service_id: @service.id
   end
 
   def new
