@@ -3,27 +3,25 @@ html * {
   color: #777;
   font-family: 'Kosugi Maru', sans-serif;
 }
-h2 {font-size: 48px}
-h3 {font-size: 40px}
+h2 {
+  font-size: 48px;
+  margin-bottom: 30px;
+}
+h3 {
+  font-size: 40px;
+  margin-bottom: 30px;
+}
 p {font-size: 18px}
 
-/* body {
-  background-color: #27926f;
-} */
 /* header **************************************/
-.header-wrapper {
-}
 header {
-  background-color: #fff;
   height: 100px;
   border-bottom: 3px solid #777;
 }
-
 .logo-img {
   width: 72px;
   height: 72px;
 }
-
 .user-name {
   margin-right: 20px;
   font-size: 24px;
@@ -34,73 +32,23 @@ header {
 }
 
 /* footer **************************************/
-.footer-wrapper {
-}
 footer {
-  background-color: #fff;
   height: 150px;
+  padding-top: 30px;
   border-top: 3px solid #777;
   color: #777;
-}
-footer div {
-  width: 100%;
   text-align: center;
 }
 
 /* main ****************************************/
 .main-wrapper {
-  padding-top: 60px;
-  background-color: #fff;
+  padding: 60px 0;
 }
-
-/* about-mnsk */
-.about-mnsk {
+.content {
   text-align: center;
-  margin-bottom: 90px;
-}
-.about-mnsk h2, 
-.about-mnsk h3, 
-.about-mnsk p {
-  margin-bottom: 30px;
-}
-.about-mnsk ul {
-  list-style: none;
-  padding: 0;
-}
-.about-mnsk li {
-  font-size: 28px;
-}
-
-/* subscriptions */
-.subscriptions h2 {
-  text-align: center;
-  margin-bottom: 30px;
-}
-.sb {
-  text-align: center;
-  margin-bottom: 30px;
-}
-.card {
-  border: none;
-  margin-bottom: 16px;
-  padding-top: 16px;
-}
-.card-image {
-  max-height: 180px;
-}
-.card-body{
-  padding: 20px 0;
 }
 
 /* registration ********************************/
-.registration {
-  padding: 60px 0;
-  text-align: center;
-}
-.registration h2 {
-  font-size: 40px;
-  margin-bottom: 16px;
-}
 .registration label {
   font-size: 18px;
   margin-bottom: 4px;
@@ -130,26 +78,47 @@ footer div {
   margin: 0 auto;
 }
 
-/* user-info ***********************************/
-.user {
-  padding-bottom: 60px;
-  text-align: center;
-}
-.user h2,
-.user h3 {
+/* user ****************************************/
+.user-info {margin-bottom: 45px;}
+.user .link {color: #c725c7;}
+.user .link:hover {color: #06b45d;}
+
+/* service *************************************/
+/* about-mnsk */
+.about-mnsk {
+  margin-bottom: 90px;
+} 
+.about-mnsk p {
   margin-bottom: 30px;
 }
-.user-info {
-  margin-bottom: 45px;
+.about-mnsk ul {
+  list-style: none;
+  padding: 0;
 }
-.user .link {
-  color: #c725c7;
-}
-.user .link:hover {
-  color: #06b45d;
+.about-mnsk li {
+  font-size: 28px;
 }
 
-/* service ************************************/
+/* subscriptions */
+.subscriptions h2 {
+  text-align: center;
+}
+.sb {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.card {
+  border: none;
+  margin-bottom: 16px;
+  padding-top: 16px;
+}
+.card-image {
+  max-height: 180px;
+}
+.card-body{
+  padding: 20px 0;
+}
+
 /* new */
 .service-new {
   text-align: center;
@@ -183,9 +152,6 @@ footer div {
   text-align: center;
   margin-bottom: 30px;
 }
-.service-show h2 {
-  margin-bottom: 30px;
-}
 .service-show .carousel {
   margin-bottom: 30px;
 }
@@ -207,8 +173,3 @@ footer div {
 }
 
 /* order ***************************************/
-/* new */
-.order-new {
-  text-align: center;
-  padding-bottom: 60px;
-}
