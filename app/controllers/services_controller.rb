@@ -4,6 +4,7 @@ class ServicesController < ApplicationController
   before_action :register_card?, except: [:index, :show, :edit, :update]
 
   def index
+    @services = Service.order('created_at DESC')
   end
 
   def show
