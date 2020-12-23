@@ -1,6 +1,6 @@
 class CardsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :register_card?
+  before_action :authenticate_user! # ログイン状態の確認
+  before_action :register_card? # カード情報登録済みかのチェック
 
   def new
     @user = User.find(current_user.id)
@@ -26,7 +26,6 @@ class CardsController < ApplicationController
 
   private
 
-  # すでに登録済みかチェックし、二重で登録させないようにする
   def register_card?
     redirect_to root_path and return if current_user.card.present?
   end

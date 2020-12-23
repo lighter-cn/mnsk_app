@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user! # ログイン状態の確認
   before_action :get_user, only: [:show, :edit, :update]
   def show
     # カード情報取得

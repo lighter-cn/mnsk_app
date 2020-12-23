@@ -1,0 +1,4 @@
+<%# サブスクの停止処理重複時のエラー文言 %>
+<% if @error.message.start_with?("Subscription") && @error.message.end_with?("has already been paused.") %>
+  <h3>既にサブスクリプションは停止済みです。</h3>
+<% end %>

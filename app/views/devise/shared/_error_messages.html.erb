@@ -1,15 +1,36 @@
 <% if resource.errors.any? %>
   <div id="error_explanation">
-    <h2>
-      <%= I18n.t("errors.messages.not_saved",
-                 count: resource.errors.count,
-                 resource: resource.class.model_name.human.downcase)
-       %>
-    </h2>
-    <ul>
+    <p class="error-title">登録エラー</p>
+    <div class="error-reasons">
       <% resource.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <% if message == "Name can't be blank" %>
+          <p>名前が空白です</p>
+        <% end %>
+        <% if message == "Birthday can't be blank" %>
+          <p>生年月日が空白です</p>
+        <% end %>
+        <% if message == "Email can't be blank" %>
+          <p>メールアドレスが空白です</p>
+        <% end %>
+        <% if message == "Password can't be blank" %>
+          <p>パスワードが空白です</p>
+        <% end %>
+        <% if message == "Email has already been taken" %>
+          <p>既に登録済みのメールアドレスです</p>
+        <% end %>
+        <% if message == "Password confirmation doesn't match Password" %>
+          <p>パスワードが一致していません</p>
+        <% end %>
+        <% if message == "Password is too short (minimum is 6 characters)" %>
+          <p>パスワードが短すぎます。6文字以上の半角英数で入力してください</p>
+        <% end %>
+        <% if message == "Name is too short (minimum is 4 characters)" %>
+          <p>お名前が短すぎます。4文字以上15文字以下で入力してください</p>
+        <% end %>
+        <% if message == "Name is too long (maximum is 15 characters)" %>
+          <p>お名前が長すぎます。4文字以上15文字以下で入力してください</p>
+        <% end %>
       <% end %>
-    </ul>
+    </div>
   </div>
 <% end %>
