@@ -43,6 +43,19 @@ footer {
 /* main ****************************************/
 .main-wrapper {padding: 60px 0;}
 .content {text-align: center;}
+.mnsk-link {
+  background-color: #eeeeee;
+  color: #07bd62;
+  padding: 8px;
+  border-radius: 12px;
+  transition: all, .2s;
+}
+.mnsk-link:hover {
+  background-color: #dbdbdb;
+  color: #05914b;
+  text-decoration: none;
+  transition: all, .2s;
+}
 
 /* registration ********************************/
 .registration label {

@@ -63,8 +63,8 @@
           <%# QRボタン %>
           <span>QR発行</span>
           <%# 停止ボタン %>
-          <% if @sub.status == "paused" %>
-            <span>再開</span>
+          <% if @sub.status == "paused" || @sub.status == "canceled" %>
+            <%= link_to "再開する", resume_service_order_path(params[:id],@order.id), class: "mnsk-link"%>
           <% else %>
             <%= link_to "停止する", pause_service_order_path(params[:id],@order.id), class: "mnsk-link"%>
           <% end %>
