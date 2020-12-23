@@ -5,4 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one :card, dependent: :destroy
   has_many :services
+  
+  with_options presence: true do
+    validates :name,     length: { maximum: 15 , too_long: "最大15字までです。"}
+    validates :birthday
+  end
 end
