@@ -1,6 +1,7 @@
 class ServicesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :pull_user
+  before_action :pull_service, only: [:show, :edit, :update]
   before_action :register_card?, except: [:index, :show, :edit, :update]
 
   def index
@@ -8,14 +9,14 @@ class ServicesController < ApplicationController
   end
 
   def show
-    @service = Service.find(params[:id])
-    @order = Order.find_by(user_id: current_user.id, service_id: @service.id)
+    if user_signed_in?
+      @order = Order.find_by user_id: current_user.id, service_id: params[:id]
+    end
 
     unless @order.nil?
       # payjpの処理
       Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       customer_token = current_user.card.customer_token
-
       @sub = Payjp::Subscription.retrieve(@order.subscription)
     end
   end
@@ -25,7 +26,7 @@ class ServicesController < ApplicationController
   end
 
   def create
-    plan_name = "#{params[:service][:service_name]}_#{current_user.id}_#{get_data}"
+    plan_name = "#{params[:service][:service_name]}_#{current_user.id}_#{Time.now.to_i}"
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     plan = Payjp::Plan.create(
       name: plan_name,
@@ -42,12 +43,10 @@ class ServicesController < ApplicationController
   end
 
   def edit
-    @service = Service.find(params[:id])
     is_owner?
   end
 
   def update
-    @service = Service.find(params[:id])
     is_owner?
     if @service.update(service_params(@service.service_id))
       redirect_to service_path(params[:id])
@@ -62,9 +61,13 @@ class ServicesController < ApplicationController
     @user = User.find(current_user.id) if user_signed_in?
   end
 
+  def pull_service
+    @service = Service.find(params[:id])
+  end
+
   def service_params(plan_id)
-    params.require(:service).permit(:service_name, :price, :explanation, :category_id, images: []).merge(service_status: 'open',
-                                                                                                         service_id: plan_id, user_id: current_user.id)
+    params
+      .require(:service).permit(:service_name, :price, :explanation, :category_id, images: []).merge(service_status: 'open', service_id: plan_id, user_id: current_user.id)
   end
 
   def register_card?
@@ -73,9 +76,5 @@ class ServicesController < ApplicationController
 
   def is_owner?
     redirect_to root_path unless current_user.id == @service.user_id
-  end
-
-  def get_data
-    DateTime.now
   end
 end
