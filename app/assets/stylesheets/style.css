@@ -3,27 +3,25 @@ html * {
   color: #777;
   font-family: 'Kosugi Maru', sans-serif;
 }
-h2 {font-size: 48px}
-h3 {font-size: 40px}
+h2 {
+  font-size: 48px;
+  margin-bottom: 30px;
+}
+h3 {
+  font-size: 40px;
+  margin-bottom: 30px;
+}
 p {font-size: 18px}
 
-/* body {
-  background-color: #27926f;
-} */
 /* header **************************************/
-.header-wrapper {
-}
 header {
-  background-color: #fff;
   height: 100px;
   border-bottom: 3px solid #777;
 }
-
 .logo-img {
   width: 72px;
   height: 72px;
 }
-
 .user-name {
   margin-right: 20px;
   font-size: 24px;
@@ -34,142 +32,64 @@ header {
 }
 
 /* footer **************************************/
-.footer-wrapper {
-}
 footer {
-  background-color: #fff;
   height: 150px;
+  padding-top: 30px;
   border-top: 3px solid #777;
   color: #777;
-}
-footer div {
-  width: 100%;
   text-align: center;
 }
 
 /* main ****************************************/
-.main-wrapper {
-  padding-top: 60px;
-  background-color: #fff;
-}
-
-/* about-mnsk */
-.about-mnsk {
-  text-align: center;
-  margin-bottom: 90px;
-}
-.about-mnsk h2, 
-.about-mnsk h3, 
-.about-mnsk p {
-  margin-bottom: 30px;
-}
-.about-mnsk ul {
-  list-style: none;
-  padding: 0;
-}
-.about-mnsk li {
-  font-size: 28px;
-}
-
-/* subscriptions */
-.subscriptions h2 {
-  text-align: center;
-  margin-bottom: 30px;
-}
-.sb {
-  text-align: center;
-  margin-bottom: 30px;
-}
-.card {
-  border: none;
-  margin-bottom: 16px;
-  padding-top: 16px;
-}
-.card-image {
-  max-height: 180px;
-}
-.card-body{
-  padding: 20px 0;
-}
+.main-wrapper {padding: 60px 0;}
+.content {text-align: center;}
 
 /* registration ********************************/
-.registration {
-  padding: 60px 0;
-  text-align: center;
-}
-.registration h2 {
-  font-size: 40px;
-  margin-bottom: 16px;
-}
 .registration label {
   font-size: 18px;
   margin-bottom: 4px;
 }
-.registration .field {
-  margin-bottom: 16px;
-}
-.registration .field p{
-  margin-bottom: 4px;
-}
-.registration input {
-  width: 200px;
-}
-.actions {
-  margin: 32px 0 16px;
-}
-.actions input {width: 100px;}
-.check input {
-  width: 10px
-}
+.registration .field {margin-bottom: 16px}
+.registration .field p{margin-bottom: 4px}
+.registration input {width: 200px}
+.actions {margin: 32px 0 16px}
+.actions input {width: 100px}
+.check input {width: 10px}
 .exp_month,
-.exp_year {
-  width: 80px;
-}
+.exp_year {width: 80px}
 .card_limit {
   width: 200px;
   margin: 0 auto;
 }
 
-/* user-info ***********************************/
-.user {
-  padding-bottom: 60px;
-  text-align: center;
-}
-.user h2,
-.user h3 {
-  margin-bottom: 30px;
-}
-.user-info {
-  margin-bottom: 45px;
-}
-.user .link {
-  color: #c725c7;
-}
-.user .link:hover {
-  color: #06b45d;
-}
+/* user ****************************************/
+.user-info {margin-bottom: 45px;}
+.user .link {color: #c725c7;}
+.user .link:hover {color: #06b45d;}
 
-/* service ************************************/
-/* new */
-.service-new {
-  text-align: center;
-  padding-bottom: 60px;
+/* service *************************************/
+/* about-mnsk */
+.about-mnsk {margin-bottom: 90px}
+.about-mnsk p {margin-bottom: 30px}
+.about-mnsk ul {
+  list-style: none;
+  padding: 0;
 }
-.service-new .field {
-  margin-bottom: 20px;
+.about-mnsk li {font-size: 28px}
+
+/* subscriptions */
+.sb {margin-bottom: 30px}
+.card {
+  border: none;
+  margin-bottom: 16px;
+  padding-top: 16px;
 }
-#image-list img {
-  max-width: 200px;
-  height: auto;
-}
-/* edit */
-.service-edit {
-  text-align: center;
-  padding-bottom: 60px;
-}
-.service-edit .field {
-  margin-bottom: 20px;
-}
+.card-image {max-height: 180px}
+.card-body{padding: 20px 0}
+
+/* new / edit */
+.service-new .field,
+.service-edit .field {margin-bottom: 30px;}
 #image-list img {
   max-width: 200px;
   height: auto;
@@ -179,20 +99,7 @@ footer div {
   height: auto;
 }
 /* show */
-.service-show {
-  text-align: center;
-  margin-bottom: 30px;
-}
-.service-show h2 {
-  margin-bottom: 30px;
-}
-.service-show .carousel {
-  margin-bottom: 30px;
-}
-.service-button {
-  text-align: center;
-  margin-bottom: 60px;
-}
+.service-show .carousel {margin-bottom: 30px}
 .service-show .carousel {
   height: 500px;
   line-height: 500px;
@@ -202,13 +109,6 @@ footer div {
   height: auto;
 }
 .carousel-control-next,
-.carousel-control-prev {
-  filter: invert(100%);
-}
+.carousel-control-prev {filter: invert(100%)}
 
 /* order ***************************************/
-/* new */
-.order-new {
-  text-align: center;
-  padding-bottom: 60px;
-}

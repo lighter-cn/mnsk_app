@@ -1,5 +1,5 @@
 <div class="main-wrapper container">
-  <div class="service-edit">
+  <div class="service-edit content">
     <h2>登録情報更新</h2>
     <%= form_with model: @service, id: 'service-form',local: true do |f| %>
       <div class="field">
@@ -29,7 +29,9 @@
       </div>
 
       <% @service.images.each do |image| %>
-        <%= image_tag image, class: 'service-images' %>
+        <div class="field">
+          <%= image_tag image, class: 'service-images' %>
+        </div>
       <% end %>
 
       <div class="field">

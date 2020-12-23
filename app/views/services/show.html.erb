@@ -1,5 +1,5 @@
 <div class="main-wrapper container">
-  <div class="service-show">
+  <div class="service-show content">
     <h2><%= @service.service_name %></h2>
     <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
@@ -42,9 +42,8 @@
     <p>月額：¥<%= @service.price %></p>
     <p>出品者：<%= @service.user.name %></p>
   </div>
-  </div>
 
-  <div class="service-button">
+  <div class="service-button content">
     <%# ボタン出し分け %>
     <%# ログイン済みなら %>
     <% if user_signed_in? %>
@@ -65,7 +64,7 @@
           <span>QR発行</span>
           <%# 停止ボタン %>
           <% if @sub.status == "paused" %>
-            <%= 再開する%>
+            <span>再開</span>
           <% else %>
             <%= link_to "停止する", pause_service_order_path(params[:id],@order.id), class: "mnsk-link"%>
           <% end %>
@@ -80,5 +79,4 @@
       <a href="/users/sign_in" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-success">log in</button></a>
     <% end %>
   </div>
-
 </div>
