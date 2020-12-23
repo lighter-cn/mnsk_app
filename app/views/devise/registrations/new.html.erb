@@ -1,40 +1,40 @@
 <div class="main-wrapper container">
   <div class="registration content">
-    <h2>Sign up</h2>
+    <h2>ユーザー登録</h2>
 
     <%= form_for(@user, url: user_registration_path, class: 'registration-form') do |f| %>
       <%= render "devise/shared/error_messages", resource: @user %>
 
       <div class="field">
-        <%= f.label :name %><br />
+        <%= f.label :name, "お名前[必須]" %><br />
         <%= f.text_field :name %>
       </div>
 
       <div class="field">
-        <%= f.label :birthday %><br />
+        <%= f.label :birthday, "生年月日[必須]" %><br />
         <%= f.date_field :birthday %>
       </div>
 
       <div class="field">
-        <%= f.label :email %><br />
+        <%= f.label :email , "メールアドレス[必須]" %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       </div>
 
       <div class="field">
-        <%= f.label :password %>
+        <%= f.label :password, "パスワード[必須]" %>
         <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <em>(<%= @minimum_password_length %>文字以上)</em>
         <% end %><br />
         <%= f.password_field :password, autocomplete: "new-password" %>
       </div>
 
       <div class="field">
-        <%= f.label :password_confirmation %><br />
+        <%= f.label :password_confirmation , "パスワード(確認用)"%><br />
         <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
       </div>
 
       <div class="actions">
-        <%= f.submit "Next" %>
+        <%= f.submit "次へ" %>
       </div>
     <% end %>
   </div>

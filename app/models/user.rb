@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :services
   
   with_options presence: true do
-    validates :name,     length: { maximum: 15 , too_long: "最大15字までです。"}
+    validates :name,     length: { maximum: 15 , minimum: 4 }
     validates :birthday
   end
 end

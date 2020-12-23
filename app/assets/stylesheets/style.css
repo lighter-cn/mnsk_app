@@ -66,6 +66,9 @@ footer {
 .user-info {margin-bottom: 45px;}
 .user .link {color: #c725c7;}
 .user .link:hover {color: #06b45d;}
+.user table{margin: 0 auto}
+.user table tr td {padding-bottom: 16px}
+
 
 /* service *************************************/
 /* about-mnsk */
@@ -112,3 +115,14 @@ footer {
 .carousel-control-prev {filter: invert(100%)}
 
 /* order ***************************************/
+
+/* error ***************************************/
+.error-title {
+  font-size: 24px;
+  color: #770101;
+}
+.error-reasons {list-style: none}
+.error-reasons p {
+  color: #770101;
+  font-size: 16px;
+}

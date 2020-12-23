@@ -2,17 +2,16 @@
   <div class="registration content">
     <h3>ユーザー情報更新</h3>
     <%= form_for(@user, url: user_path(current_user.id), method: :patch, class: 'registration-form') do |f| %>
-      <%= render "devise/shared/error_messages", resource: @user %>
       <div class="field">
-        <%= f.label :name %><br />
+        <%= f.label :name, "お名前" %><br />
         <%= f.text_field :name %>
       </div>
       <div class="field">
-        <%= f.label :email %><br />
+        <%= f.label :email, "メールアドレス" %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       </div>
       <div class="actions">
-        <%= f.submit "Edit" %>
+        <%= f.submit "更新" %>
       </div>
     <% end %>
   </div>
