@@ -9,9 +9,7 @@ class ServicesController < ApplicationController
   end
 
   def show
-    if user_signed_in?
-      @order = Order.find_by user_id: current_user.id, service_id: params[:id]
-    end
+    @order = Order.find_by user_id: current_user.id, service_id: params[:id] if user_signed_in?
 
     unless @order.nil?
       # payjpの処理
