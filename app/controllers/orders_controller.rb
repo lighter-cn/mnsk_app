@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   before_action :pull_user                               # ユーザー情報取得
   before_action :is_owner?                               # サブスク出品者のチェック
   before_action :already_buy?, except: [:pause, :resume] # 既にサブスク購入済みかのチェック
-  before_action :find_order, only: [:pause, :resume] # orderの有無を確認
+  before_action :find_order, only: [:pause, :resume]     # orderの有無を確認
 
   def new
     @order = Order.new
