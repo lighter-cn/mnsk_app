@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:new, :create] do
       member do
         get :pause
+        get :resume
       end
     end
   end

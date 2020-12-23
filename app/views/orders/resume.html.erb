@@ -1,0 +1,10 @@
+<div class="main-wrapper container">
+  <div class="content">
+    <% if @error == nil %>
+      <h2>サブスクリプションを再開しました。</h2>
+    <% else %>
+      <%= render 'shared/error', locals: {error: @error} %>
+    <% end %>
+    <%= link_to "トップ", root_path, class: "mnsk-link"%>
+  </div>
+</div>
