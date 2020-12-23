@@ -41,38 +41,22 @@ footer {
 }
 
 /* main ****************************************/
-.main-wrapper {
-  padding: 60px 0;
-}
-.content {
-  text-align: center;
-}
+.main-wrapper {padding: 60px 0;}
+.content {text-align: center;}
 
 /* registration ********************************/
 .registration label {
   font-size: 18px;
   margin-bottom: 4px;
 }
-.registration .field {
-  margin-bottom: 16px;
-}
-.registration .field p{
-  margin-bottom: 4px;
-}
-.registration input {
-  width: 200px;
-}
-.actions {
-  margin: 32px 0 16px;
-}
-.actions input {width: 100px;}
-.check input {
-  width: 10px
-}
+.registration .field {margin-bottom: 16px}
+.registration .field p{margin-bottom: 4px}
+.registration input {width: 200px}
+.actions {margin: 32px 0 16px}
+.actions input {width: 100px}
+.check input {width: 10px}
 .exp_month,
-.exp_year {
-  width: 80px;
-}
+.exp_year {width: 80px}
 .card_limit {
   width: 200px;
   margin: 0 auto;
@@ -85,60 +69,27 @@ footer {
 
 /* service *************************************/
 /* about-mnsk */
-.about-mnsk {
-  margin-bottom: 90px;
-} 
-.about-mnsk p {
-  margin-bottom: 30px;
-}
+.about-mnsk {margin-bottom: 90px}
+.about-mnsk p {margin-bottom: 30px}
 .about-mnsk ul {
   list-style: none;
   padding: 0;
 }
-.about-mnsk li {
-  font-size: 28px;
-}
+.about-mnsk li {font-size: 28px}
 
 /* subscriptions */
-.subscriptions h2 {
-  text-align: center;
-}
-.sb {
-  text-align: center;
-  margin-bottom: 30px;
-}
+.sb {margin-bottom: 30px}
 .card {
   border: none;
   margin-bottom: 16px;
   padding-top: 16px;
 }
-.card-image {
-  max-height: 180px;
-}
-.card-body{
-  padding: 20px 0;
-}
+.card-image {max-height: 180px}
+.card-body{padding: 20px 0}
 
-/* new */
-.service-new {
-  text-align: center;
-  padding-bottom: 60px;
-}
-.service-new .field {
-  margin-bottom: 20px;
-}
-#image-list img {
-  max-width: 200px;
-  height: auto;
-}
-/* edit */
-.service-edit {
-  text-align: center;
-  padding-bottom: 60px;
-}
-.service-edit .field {
-  margin-bottom: 20px;
-}
+/* new / edit */
+.service-new .field,
+.service-edit .field {margin-bottom: 30px;}
 #image-list img {
   max-width: 200px;
   height: auto;
@@ -148,17 +99,7 @@ footer {
   height: auto;
 }
 /* show */
-.service-show {
-  text-align: center;
-  margin-bottom: 30px;
-}
-.service-show .carousel {
-  margin-bottom: 30px;
-}
-.service-button {
-  text-align: center;
-  margin-bottom: 60px;
-}
+.service-show .carousel {margin-bottom: 30px}
 .service-show .carousel {
   height: 500px;
   line-height: 500px;
@@ -168,8 +109,6 @@ footer {
   height: auto;
 }
 .carousel-control-next,
-.carousel-control-prev {
-  filter: invert(100%);
-}
+.carousel-control-prev {filter: invert(100%)}
 
 /* order ***************************************/
