@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user! # ログイン状態の確認
-  before_action :get_user, only: [:show, :edit, :update]
+  before_action :pull_user, only: [:show, :edit, :update]
   def show
     # カード情報取得
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
@@ -27,8 +27,8 @@ class UsersController < ApplicationController
 
   private
 
-  def get_user
-    @user = User.find(current_user.id)
+  def pull_user
+    @user = User.find(current_user.id) if user_signed_in?
   end
 
   def update_params

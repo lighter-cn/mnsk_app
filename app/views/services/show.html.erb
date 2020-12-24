@@ -61,7 +61,7 @@
         <% if @order != nil %>
         <%# 購入済みなら %>
           <%# QRボタン %>
-          <span>QR発行</span>
+          <%= link_to "QRコードを発行する", codes_path(order_id: @order.id,service_id: @service.id), method: :post, class: "mnsk-link"%>
           <%# 停止ボタン %>
           <% if @sub.status == "paused" || @sub.status == "canceled" %>
             <%= link_to "再開する", resume_service_order_path(params[:id],@order.id), class: "mnsk-link"%>
