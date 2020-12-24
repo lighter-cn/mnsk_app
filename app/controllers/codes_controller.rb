@@ -9,10 +9,11 @@ class CodesController < ApplicationController
     @error = []
 
     # owner check
-    # @error << "このサブスクのオーナーではありません" unless current_user.id == service.user_id
+    @error << "このサブスクのオーナーではありません" unless current_user.id == service.user_id
     # limit check
     @error << "このコードは有効期限切れです" unless code.created_at > Time.now.yesterday
     @error << "このコードは使用済みです" unless code.status == "not used"
+    @error << "このコードは正しくありません" unless code.code == params[:code]
 
   end
 
@@ -58,11 +59,15 @@ class CodesController < ApplicationController
         end
       end
     end
-    @url = code_path(@code.id,code: @code.code)
+    
+    @url = code_path(@code.id,code: @code.code) if @code.present?
+
   end
 
   def update
     # 使用されたら使用済みにする
+    code = Code.find(params[:id])
+    code.update(status: "used")
   end
 
   private
