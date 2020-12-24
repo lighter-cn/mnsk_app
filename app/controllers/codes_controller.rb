@@ -9,12 +9,11 @@ class CodesController < ApplicationController
     @error = []
 
     # owner check
-    @error << "このサブスクのオーナーではありません" unless current_user.id == service.user_id
+    @error << 'このサブスクのオーナーではありません' unless current_user.id == service.user_id
     # limit check
-    @error << "このコードは有効期限切れです" unless code.created_at > Time.now.yesterday
-    @error << "このコードは使用済みです" unless code.status == "not used"
-    @error << "このコードは正しくありません" unless code.code == params[:code]
-
+    @error << 'このコードは有効期限切れです' unless code.created_at > Time.now.yesterday
+    @error << 'このコードは使用済みです' unless code.status == 'not used'
+    @error << 'このコードは正しくありません' unless code.code == params[:code]
   end
 
   def create
@@ -34,16 +33,16 @@ class CodesController < ApplicationController
 
     # error check
     @error = []
-    @error << "サブスクを購入してません" unless customer_token == sub.customer # ユーザーが購入済みかチェック
-    @error << "サブスクの期限が切れています" unless sub.current_period_end > Time.now.to_i # 期限内かチェック
-    exists_code = Code.where(order_id: order.id).where("created_at > ?",Time.now.yesterday).last # 24時間以内に発行したデータを引っ張る
-    if exists_code.present? 
-      if exists_code.status == "not used"
+    @error << 'サブスクを購入してません' unless customer_token == sub.customer # ユーザーが購入済みかチェック
+    @error << 'サブスクの期限が切れています' unless sub.current_period_end > Time.now.to_i # 期限内かチェック
+    exists_code = Code.where(order_id: order.id).where('created_at > ?', Time.now.yesterday).last # 24時間以内に発行したデータを引っ張る
+    if exists_code.present?
+      if exists_code.status == 'not used'
         @code = exists_code
       else
-        @error << "本日の使用上限に達しました"
+        @error << '本日の使用上限に達しました'
       end
-    else 
+    else
       unless @error.present?
         # コード生成
         new_cord = create_code
@@ -51,23 +50,22 @@ class CodesController < ApplicationController
         begin
           @code = Code.create(
             code: new_cord,
-            status: "not used",
+            status: 'not used',
             order_id: order.id
           )
-        rescue => e
+        rescue StandardError => e
           @error = e.message
         end
       end
     end
-    
-    @url = code_path(@code.id,code: @code.code) if @code.present?
 
+    @url = code_path(@code.id, code: @code.code) if @code.present?
   end
 
   def update
     # 使用されたら使用済みにする
     code = Code.find(params[:id])
-    code.update(status: "used")
+    code.update(status: 'used')
   end
 
   private
