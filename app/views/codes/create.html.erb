@@ -7,7 +7,9 @@
       <% end %>
     <% else %>
       <p>このQRコードをビジネスオーナーに提示してください</p>
-      <%= link_to "コード" ,@url %>
+      <div class="qr-wrapper">
+        <%= image_tag "qr.png" %>
+      </div>
     <% end %>
   </div>
 </div>

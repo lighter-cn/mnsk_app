@@ -9,7 +9,7 @@ class CodesController < ApplicationController
     @error = []
 
     # owner check
-    @error << 'このサブスクのオーナーではありません' unless current_user.id == service.user_id
+    # @error << 'このサブスクのオーナーではありません' unless current_user.id == service.user_id
     # limit check
     @error << 'このコードは有効期限切れです' unless code.created_at > Time.now.yesterday
     @error << 'このコードは使用済みです' unless code.status == 'not used'
@@ -59,7 +59,9 @@ class CodesController < ApplicationController
       end
     end
 
-    @url = code_path(@code.id, code: @code.code) if @code.present?
+    @url = "#{request.url}&code=#{@code.code}" if @code.present?
+    create_qr(@url)
+  
   end
 
   def update
@@ -76,5 +78,25 @@ class CodesController < ApplicationController
 
   def create_code
     Faker::Internet.password(min_length: 10, max_length: 12)
+  end
+
+  def create_qr url
+    require 'rqrcode'
+    require 'chunky_png'
+
+    qrcode = RQRCode::QRCode.new(url)
+    png = qrcode.as_png(
+      bit_depth: 1,
+      border_modules: 4,
+      color_mode: ChunkyPNG::COLOR_GRAYSCALE,
+      color: 'black',
+      file: nil,
+      fill: 'white',
+      module_px_size: 6,
+      resize_exactly_to: false,
+      resize_gte_to: false,
+      size: 200
+    )
+    IO.binwrite("app/assets/images/qr.png", png.to_s)
   end
 end
