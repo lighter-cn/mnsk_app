@@ -3,8 +3,17 @@ class CodesController < ApplicationController
   before_action :pull_user
 
   def show
-    # オーナーかどうかチェック
-    # 有効かどうか判定
+    code = Code.find(params[:id])
+    service = Service.find(code.order_id)
+
+    @error = []
+
+    # owner check
+    # @error << "このサブスクのオーナーではありません" unless current_user.id == service.user_id
+    # limit check
+    @error << "このコードは有効期限切れです" unless code.created_at > Time.now.yesterday
+    @error << "このコードは使用済みです" unless code.status == "not used"
+
   end
 
   def create
