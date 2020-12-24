@@ -1,0 +1,13 @@
+<div class="main-wrapper container">
+  <div class="content">
+    <h2>QRコード発行</h2>
+    <% if @error.present? %>
+      <% @error.each do |error| %>
+        <p><%= error %></p>
+      <% end %>
+    <% else %>
+      <p>このQRコードをビジネスオーナーに提示してください</p>
+      <%= link_to "コード" ,@url %>
+    <% end %>
+  </div>
+</div>

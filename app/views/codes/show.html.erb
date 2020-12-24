@@ -1,0 +1,13 @@
+<div class="main-wrapper container">
+  <div class="content">
+    <h2>QRコード確認</h2>
+    <% if @error.present? %>
+      <% @error.each do |error| %>
+        <p><%= error %></p>
+      <% end %>
+    <% else %>
+      <p>このコードは利用可能です</p>
+      <%= link_to "使用済みにする", code_path(params[:id]),method: :patch, class: "mnsk-link"%>
+    <% end %>
+  </div>
+</div>
