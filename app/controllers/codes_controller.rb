@@ -7,8 +7,7 @@ class CodesController < ApplicationController
     order = Order.find(@code.order_id)
     @service = Service.find(order.service_id)
 
-    error_check("show")
-
+    error_check('show')
   end
 
   def create
@@ -22,7 +21,7 @@ class CodesController < ApplicationController
       @sub = Payjp::Subscription.retrieve(order.subscription)
     end
 
-    error_check("create")
+    error_check('create')
 
     exists_code = Code.where(order_id: order.id).where('created_at > ?', Time.now.yesterday).last # 24時間以内に発行したデータを引っ張る
     if exists_code.present?
@@ -35,14 +34,13 @@ class CodesController < ApplicationController
       unless @error.present?
         new_cord = create_code # コード生成
         begin
-          @code = Code.create(code: new_cord,status: 'not used',order_id: order.id)
+          @code = Code.create(code: new_cord, status: 'not used', order_id: order.id)
         rescue StandardError => e
           @error = e.message
         end
       end
     end
-    @url = request.url.sub!(/\?.*/,'')+"/#{@code.id}?code=#{@code.code}" if @code.present?
-
+    @url = request.url.sub!(/\?.*/, '') + "/#{@code.id}?code=#{@code.code}" if @code.present?
   end
 
   def update
@@ -61,17 +59,17 @@ class CodesController < ApplicationController
     Faker::Internet.password(min_length: 10, max_length: 12)
   end
 
-  def error_check type
+  def error_check(type)
     @error = []
-    if type == "show"
+    if type == 'show'
       @error << '出品者はではありません' unless current_user.id == @service.user_id
       @error << 'このコードは有効期限切れです' unless @code.created_at > Time.now.yesterday
       @error << 'このコードは使用済みです' unless @code.status == 'not used'
       @error << 'このコードは正しくありません' unless @code.code == params[:code]
-    elsif type == "create"
+    elsif type == 'create'
       @error << 'サブスクを購入してません' unless @customer_token == @sub.customer # ユーザーが購入済みかチェック
       @error << 'サブスクの期限が切れています' unless @sub.current_period_end > Time.now.to_i # 期限内かチェック
     end
-    return @error
+    @error
   end
 end
