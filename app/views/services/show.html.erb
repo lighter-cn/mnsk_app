@@ -44,10 +44,8 @@
   </div>
 
   <div class="service-button content">
-    <%# ボタン出し分け %>
     <%# ログイン済みなら %>
     <% if user_signed_in? %>
-      <p>ボタン</p>
       <%# 出品者なら %>
       <% if current_user.id == @service.user_id %>
         <%= link_to "編集する", edit_service_path(params[:id]), class: "mnsk-link"%>
@@ -78,5 +76,6 @@
       <a href="/users/sign_up" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-primary">sign up</button></a>
       <a href="/users/sign_in" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-success">log in</button></a>
     <% end %>
+    <%= link_to "トップ", root_path, class: "mnsk-link"%>
   </div>
 </div>

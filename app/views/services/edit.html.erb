@@ -37,6 +37,8 @@
       <div class="field">
         <%= f.submit '更新' %>
       </div>
+      <%= link_to "詳細画面", service_path(params[:id]), class: "mnsk-link"%>
+      <%= link_to "トップ", root_path, class: "mnsk-link"%>
     <% end %>
   </div>
 </div>
