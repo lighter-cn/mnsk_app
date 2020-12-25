@@ -12,5 +12,7 @@
         <p><%= @url %></p>
       </div>
     <% end %>
+    <%= link_to "もどる", service_path(params[:service_id]), class: "mnsk-link"%>
+    <%= link_to "トップ", root_path, class: "mnsk-link"%>
   </div>
 </div>

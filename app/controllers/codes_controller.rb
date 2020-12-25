@@ -4,12 +4,12 @@ class CodesController < ApplicationController
 
   def show
     code = Code.find(params[:id])
-    service = Service.find(code.order_id)
+    order = Order.find(code.order_id)
+    service = Service.find(order.service_id)
 
     @error = []
-    # owner check
+
     @error << 'このサブスクのオーナーではありません' unless current_user.id == service.user_id
-    # limit check
     @error << 'このコードは有効期限切れです' unless code.created_at > Time.now.yesterday
     @error << 'このコードは使用済みです' unless code.status == 'not used'
     @error << 'このコードは正しくありません' unless code.code == params[:code]
@@ -81,4 +81,7 @@ class CodesController < ApplicationController
     Faker::Internet.password(min_length: 10, max_length: 12)
   end
   
+  def check_error
+    
+  end
 end
