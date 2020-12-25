@@ -24,18 +24,31 @@ class ServicesController < ApplicationController
   end
 
   def create
-    plan_name = "#{params[:service][:service_name]}_#{current_user.id}_#{Time.now.to_i}"
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-    plan = Payjp::Plan.create(
-      name: plan_name,
-      amount: params[:service][:price],
-      currency: 'jpy',
-      interval: 'month'
-    )
-    @service = Service.new(service_params(plan.id))
+    @error= []
+    begin
+      plan_name = "#{params[:service][:service_name]}_#{current_user.id}_#{Time.now.to_i}"
+      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+      plan = Payjp::Plan.create(
+        name: plan_name,
+        amount: params[:service][:price],
+        currency: 'jpy',
+        interval: 'month'
+      )
+    rescue => e
+      @error << e.message
+    end
+
+    begin
+      @service = Service.new(service_params(plan.id))
+    rescue => e
+      @service = Service.new(service_params(0))
+    end
     if @service.save
       redirect_to root_path
     else
+      @service.errors.full_messages.each do |error|
+        @error << error
+      end
       render :new
     end
   end
