@@ -7,7 +7,6 @@ class CodesController < ApplicationController
     service = Service.find(code.order_id)
 
     @error = []
-
     # owner check
     @error << 'このサブスクのオーナーではありません' unless current_user.id == service.user_id
     # limit check
@@ -59,11 +58,15 @@ class CodesController < ApplicationController
       end
     end
 
-    @url = code_path(@code.id, code: @code.code) if @code.present?
+    if @code.present?
+      get_url = request.url
+      @url = get_url.sub!(/\?.*/,'')+"/#{@code.id}?code=#{@code.code}"
+    end
+
   end
 
   def update
-    # 使用されたら使用済みにする
+    # 使用済みにする
     code = Code.find(params[:id])
     code.update(status: 'used')
   end
@@ -77,4 +80,5 @@ class CodesController < ApplicationController
   def create_code
     Faker::Internet.password(min_length: 10, max_length: 12)
   end
+  
 end

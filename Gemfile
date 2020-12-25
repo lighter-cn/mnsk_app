@@ -64,3 +64,5 @@ gem 'image_processing', '~> 1.2'
 
 gem 'devise'
 gem 'payjp'
+gem 'rqrcode'
+gem 'chunky_png', '~> 1.3', '>= 1.3.5'
