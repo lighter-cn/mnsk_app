@@ -3,9 +3,12 @@ class CodesController < ApplicationController
   before_action :pull_user
 
   def show
-    @code = Code.find(params[:id])
-    @service = Service.find(@code.order_id)
+    code = Code.find(params[:id])
+    order = Order.find(code.order_id)
+    service = Service.find(order.service_id)
+
     error_check("show")
+
   end
 
   def create

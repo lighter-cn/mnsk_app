@@ -5,6 +5,7 @@
     <div>
       <% if user_signed_in? %>
         <%= link_to @user.name, user_path(current_user),class: 'user-name' %>
+        <a href="/services/new" rel="nofollow"><button type="button" class="btn btn-outline-info">サブスクを作る</button></a>
         <a href="/users/sign_out" rel="nofollow" data-method="delete"><button type="button" class="btn btn-outline-danger">log out</button></a>
       <% else %>
         <a href="/users/sign_up" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-primary">sign up</button></a>

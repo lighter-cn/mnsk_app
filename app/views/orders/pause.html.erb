@@ -9,5 +9,6 @@
       <%= Time.at(@sub.current_period_end).strftime("%Y年%m月%d日") %>まで利用可能です。<br>
       購入を再開したい場合は、サービスの詳細画面より再開可能です。
     </p>
+    <%= link_to "もどる", service_path(params[:service_id]), class: "mnsk-link"%>
   </div>
 </div>
