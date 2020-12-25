@@ -8,7 +8,6 @@ class CodesController < ApplicationController
     @service = Service.find(order.service_id)
 
     error_check("show")
-
   end
 
   def create
