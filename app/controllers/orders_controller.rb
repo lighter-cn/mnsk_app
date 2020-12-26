@@ -83,7 +83,8 @@ class OrdersController < ApplicationController
           @sub.resume
         end
       rescue StandardError => e
-        @error = e
+        @error = []
+        @error << e.message
       end
     end
   end

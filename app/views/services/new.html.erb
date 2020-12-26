@@ -1,20 +1,21 @@
 <div class="main-wrapper container">
   <div class="service-new content">
     <h2>サブスク登録</h2>
+    <%= render partial: 'shared/error', error: @error unless @error == nil %>
     <%= form_with model: @service, id: 'service-form',local: true do |f| %>
       <div class="field">
         <p>サービス名</p>
-        <%= f.text_field :service_name %><br>
+        <%= f.text_field :service_name ,placeholder: "10字〜30字で入力してください" %><br>
       </div>
 
       <div class="field">
         <p>説明文</p>
-        <%= f.text_field :explanation %><br>
+        <%= f.text_area :explanation, placeholder: "30字〜300字で入力してください" %><br>
       </div>
 
       <div class="field">
-        <p>料金（月額）</p>
-        <%= f.text_field :price %><br>
+        <p>料金（月額）¥100〜¥100,000で指定</p>
+        <%= f.number_field :price , in: 100..100000 %><br>
       </div>
 
       <div class="field">
@@ -27,10 +28,6 @@
         <%= f.file_field :images, name: 'service[images][]', id: 'service_image' %>
         <div id="image-list"></div>
       </div>
-
-      <% @service.images.each do |image| %>
-        <%= image_tag image, class: 'service-images' %>
-      <% end %>
 
       <div class="field">
         <%= f.submit '作成' %>
