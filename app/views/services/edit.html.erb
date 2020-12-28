@@ -9,6 +9,10 @@
       </div>
 
       <div class="field">
+        <p>ステータス：<%= @service.service_status %></p>
+      </div>
+
+      <div class="field">
         <p>説明文</p>
         <%= f.text_field :explanation %><br>
       </div>
@@ -38,8 +42,33 @@
       <div class="field">
         <%= f.submit '更新' %>
       </div>
+    <% end %>
+
+      <% if @service.service_status == "open" %>
+        <%= form_with model: @service, id: 'service-form', method: :delete,local: true do |f| %>
+          <div class="field">
+            <p>利用期限内のお客様が一人もいらっしゃらなければ削除できます。</p>
+            <%= f.submit '削除' %>
+          </div>
+        <% end %>
+
+        <%= form_with model: @service, url: pause_service_path(params[:id]), id: 'service-form',local: true do |f| %>
+          <div class="field">
+            <p>サービスを停止し、現在登録しているお客様すべての更新を停止します。</p>
+            <%= f.submit '停止' %>
+          </div>
+        <% end %>
+
+      <% else %>
+        <%= form_with model: @service, url: resume_service_path(params[:id]), id: 'service-form',local: true do |f| %>
+          <div class="field">
+            <p>停止中のサービスを再開します。停止後は現在のすべてのお客様の自動更新が停止状態です。</p>
+            <%= f.submit '再開' %>
+          </div>
+        <% end %>
+      <% end %>
+
       <%= link_to "詳細画面", service_path(params[:id]), class: "mnsk-link"%>
       <%= link_to "トップ", root_path, class: "mnsk-link"%>
-    <% end %>
   </div>
 </div>

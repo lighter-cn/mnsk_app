@@ -49,21 +49,31 @@
       <%# 出品者なら %>
       <% if current_user.id == @service.user_id %>
         <%= link_to "編集する", edit_service_path(params[:id]), class: "mnsk-link"%>
-        <%# 購入ユーザーいない場合 %>
-          <%# 削除ボタン %>
-        <%# それ以外 %>
-          <%# 停止ボタン %>
-      <%# 出品者以外なら %>
+      <%# 出品者でないなら %>
       <% else %>
-        <%# 未購入なら %>
+        <%# 購入者 %>
         <% if @order != nil %>
           <%= link_to "QRコードを発行する", codes_path(order_id: @order.id,service_id: @service.id), method: :post, class: "mnsk-link"%>
-          <% if @sub.status == "paused" || @sub.status == "canceled" %>
-            <%= link_to "再開する", resume_service_order_path(params[:id],@order.id), class: "mnsk-link"%>
+          <% if (@sub.status == "paused" || @sub.status == "canceled" ) && @service.service_status == "open" %>
+            <%= form_with model: @order, url: resume_service_order_path(params[:id],@order.id), id: 'service-form',local: true do |f| %>
+              <div class="field">
+                <%= f.submit '再開' %>
+              </div>
+            <% end %>
+          <% elsif @service.service_status == "open" %>
+            <%= form_with model: @order, url: pause_service_order_path(params[:id],@order.id), id: 'service-form',local: true do |f| %>
+              <div class="field">
+                <%= f.submit '停止' %>
+              </div>
+            <% end %>
           <% else %>
-            <%= link_to "停止する", pause_service_order_path(params[:id],@order.id), class: "mnsk-link"%>
+            <p>
+              このサービスは出品者が終了させたため、自動的に停止されました。<br>
+              なお、<%= Time.at(@sub.current_period_end).strftime('%Y/%m/%d') %>までサブスクリプションは有効です。
+            </p>
           <% end %>
-        <% else %>
+        <%# 非購入者 %>
+        <% elsif @service_status == "open" %>
           <%= link_to "購入する", new_service_order_path(params[:id]), class: "mnsk-link"%>
         <% end %>
       <% end %>
