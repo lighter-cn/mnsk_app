@@ -67,13 +67,26 @@ class ServicesController < ApplicationController
 
   def destroy
     @error = []
-    #payjp情報取得
+    # payjp情報取得
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     plan = Payjp::Plan.retrieve(@service.service_id)
+    subs = Payjp::Subscription.all(plan: @service.service_id)
+
     begin
-      plan.delete
-      @service.destroy
-      redirect_to root_path
+      # もし最終期限が現在以前なら
+      if last_user_limit(subs) < Time.now.to_i
+        # subを全削除
+        subs.each do |subscription|
+          sub = Payjp::Subscription.retrieve(subscription.id)
+          sub.delete
+        end
+        plan.delete
+        @service.destroy
+        redirect_to root_path
+      else
+        @error << "Limit is not yet."
+        render :edit
+      end
     rescue => e
       @error << e.message
       render :edit
@@ -131,5 +144,13 @@ class ServicesController < ApplicationController
       arr << error
     end
     arr
+  end
+
+  def last_user_limit(subs)
+    last_limit = 0;
+    subs.each do |sub|
+      last_limit = sub.current_period_end if last_limit <= sub.current_period_end
+    end
+    return last_limit
   end
 end
