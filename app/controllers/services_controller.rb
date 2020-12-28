@@ -1,8 +1,8 @@
 class ServicesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :pull_user
-  before_action :is_owner?, only: [:edit, :update, :destroy]
   before_action :pull_service, only: [:show, :edit, :update, :destroy]
+  before_action :is_owner?, only: [:edit, :update, :destroy]
   before_action :register_card?, except: [:index, :show, :edit, :update]
 
   def index
@@ -66,10 +66,16 @@ class ServicesController < ApplicationController
   end
 
   def destroy
-    if @service.destroy
+    @error = []
+    #payjp情報取得
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    plan = Payjp::Plan.retrieve(@service.service_id)
+    begin
+      plan.delete
+      @service.destroy
       redirect_to root_path
-    else
-      @error = insert_error_message @service
+    rescue => e
+      @error << e.message
       render :edit
     end
   end
