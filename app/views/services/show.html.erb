@@ -49,11 +49,7 @@
       <%# 出品者なら %>
       <% if current_user.id == @service.user_id %>
         <%= link_to "編集する", edit_service_path(params[:id]), class: "mnsk-link"%>
-        <%# 購入ユーザーいない場合 %>
-          <%# 削除ボタン %>
-        <%# それ以外 %>
-          <%# 停止ボタン %>
-      <%# 出品者以外なら %>
+      <%# 出品者でないなら %>
       <% else %>
         <%# 未購入なら %>
         <% if @order != nil %>

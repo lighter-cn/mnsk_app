@@ -38,6 +38,11 @@
       <div class="field">
         <%= f.submit '更新' %>
       </div>
+      <%= form_with model: @service, id: 'service-form', method: :delete,local: true do |f| %>
+        <div class="field">
+          <%= f.submit '削除' %>
+        </div>
+      <% end %>
       <%= link_to "詳細画面", service_path(params[:id]), class: "mnsk-link"%>
       <%= link_to "トップ", root_path, class: "mnsk-link"%>
     <% end %>

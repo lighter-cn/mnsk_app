@@ -1,7 +1,8 @@
 class ServicesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :pull_user
-  before_action :pull_service, only: [:show, :edit, :update]
+  before_action :is_owner?, only: [:edit, :update, :destroy]
+  before_action :pull_service, only: [:show, :edit, :update, :destroy]
   before_action :register_card?, except: [:index, :show, :edit, :update]
 
   def index
@@ -53,13 +54,20 @@ class ServicesController < ApplicationController
   end
 
   def edit
-    is_owner?
   end
 
   def update
-    is_owner?
     if @service.update(service_params(@service.service_id))
       redirect_to service_path(params[:id])
+    else
+      @error = insert_error_message @service
+      render :edit
+    end
+  end
+
+  def destroy
+    if @service.destroy
+      redirect_to root_path
     else
       @error = insert_error_message @service
       render :edit
