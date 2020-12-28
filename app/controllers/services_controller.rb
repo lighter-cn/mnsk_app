@@ -24,7 +24,7 @@ class ServicesController < ApplicationController
   end
 
   def create
-    @error= []
+    @error = []
     begin
       plan_name = "#{params[:service][:service_name]}_#{current_user.id}_#{Time.now.to_i}"
       Payjp.api_key = ENV['PAYJP_SECRET_KEY']
@@ -34,21 +34,20 @@ class ServicesController < ApplicationController
         currency: 'jpy',
         interval: 'month'
       )
-    rescue => e
+    rescue StandardError => e
       @error << e.message
     end
 
     begin
       @service = Service.new(service_params(plan.id))
-    rescue => e
+    rescue StandardError => e
       @service = Service.new(service_params(0))
     end
     if @service.save
       redirect_to root_path
     else
-      @service.errors.full_messages.each do |error|
-        @error << error
-      end
+      @error.push(insert_error_message(@service))
+      @error.flatten!
       render :new
     end
   end
@@ -62,7 +61,8 @@ class ServicesController < ApplicationController
     if @service.update(service_params(@service.service_id))
       redirect_to service_path(params[:id])
     else
-      render :update
+      @error = insert_error_message @service
+      render :edit
     end
   end
 
@@ -87,5 +87,13 @@ class ServicesController < ApplicationController
 
   def is_owner?
     redirect_to root_path unless current_user.id == @service.user_id
+  end
+
+  def insert_error_message(service)
+    arr = []
+    service.errors.full_messages.each do |error|
+      arr << error
+    end
+    arr
   end
 end
