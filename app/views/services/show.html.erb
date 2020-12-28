@@ -55,9 +55,17 @@
         <% if @order != nil %>
           <%= link_to "QRコードを発行する", codes_path(order_id: @order.id,service_id: @service.id), method: :post, class: "mnsk-link"%>
           <% if @sub.status == "paused" || @sub.status == "canceled" %>
-            <%= link_to "再開する", resume_service_order_path(params[:id],@order.id), class: "mnsk-link"%>
+            <%= form_with model: @order, url: resume_service_order_path(params[:id],@order.id), id: 'service-form',local: true do |f| %>
+              <div class="field">
+                <%= f.submit '再開' %>
+              </div>
+            <% end %>
           <% else %>
-            <%= link_to "停止する", pause_service_order_path(params[:id],@order.id), class: "mnsk-link"%>
+            <%= form_with model: @order, url: pause_service_order_path(params[:id],@order.id), id: 'service-form',local: true do |f| %>
+              <div class="field">
+                <%= f.submit '停止' %>
+              </div>
+            <% end %>
           <% end %>
         <% else %>
           <%= link_to "購入する", new_service_order_path(params[:id]), class: "mnsk-link"%>
