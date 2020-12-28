@@ -80,6 +80,14 @@ class ServicesController < ApplicationController
     end
   end
 
+  def pause
+    
+  end
+
+  def resume
+    
+  end
+
   private
 
   def pull_user

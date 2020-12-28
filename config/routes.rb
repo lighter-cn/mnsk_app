@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   }
   root 'services#index'
   resources :services do
+    member do
+      patch :pause
+      patch :resume
+    end
     resources :orders, only: [:new, :create] do
       member do
         get :pause
