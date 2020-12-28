@@ -1,9 +1,9 @@
 class ServicesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :pull_user
-  before_action :pull_service, only: [:show, :edit, :update, :destroy]
-  before_action :is_owner?, only: [:edit, :update, :destroy]
-  before_action :register_card?, except: [:index, :show, :edit, :update]
+  before_action :pull_service,       only: [:show, :edit, :update, :destroy, :pause, :resume]
+  before_action :is_owner?,          only: [:edit, :update, :destroy, :pause, :resume]
+  before_action :register_card?,     except: [:index, :show, :edit, :update, :pause, :resume]
 
   def index
     @services = Service.order('created_at DESC')
@@ -81,11 +81,25 @@ class ServicesController < ApplicationController
   end
 
   def pause
-    
+    # すべてのsubを取得する
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    subs = Payjp::Subscription.all(plan: @service.service_id)
+
+    # すべてのsubを停止する
+    subs.each do |subscription|
+      if subscription.status == "active"
+        sub = Payjp::Subscription.retrieve(subscription.id)
+        sub.pause
+      end
+    end
+
+    @service.update(service_status: 'close')
+    redirect_to edit_service_path(params[:id])
   end
 
   def resume
-    
+    @service.update(service_status: 'open')
+    redirect_to edit_service_path(params[:id])
   end
 
   private
