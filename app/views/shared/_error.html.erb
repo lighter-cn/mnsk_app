@@ -33,15 +33,15 @@
   <% elsif error.start_with?("Images is too long (maximum is 10 characters)") %>
     <p>添付画像は10件までです</p>
   <%# 削除時のエラー文言 %>
-  <% elsif error.start_with?("You cannot delete Plan ") && error.end_with?("because it is being subscribed or will be subscribed.") %>
+  <% elsif error.start_with?("Limit is not yet.") %>
     <p>
       サブスクの利用者がいるため削除できません。<br>
       先にサービス停止処理をしてください。
     </p>
   <% else %>
-    <%# <p> %>
-    <%#= error %>
-    <%# </p> %>
+    <p>
+    <%= error %>
+    </p>
   <% end %>
 
 <% end %>

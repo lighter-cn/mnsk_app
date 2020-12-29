@@ -14,6 +14,36 @@ class Service < ApplicationRecord
     validates :images,       length: { maximum: 10 }
   end
 
+  def self.create_pln service_name, user_id, service_price
+    plan_name = "#{service_name}_#{user_id}_#{Time.now.to_i}"
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    plan = Payjp::Plan.create(
+      name: plan_name,
+      amount: service_price,
+      currency: 'jpy',
+      interval: 'month'
+    )
+    return plan
+  end
+
+  def destroy_service service
+    # payjp情報取得
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    plan = Payjp::Plan.retrieve(service.service_id)
+    subs = Payjp::Subscription.all(plan: service.service_id)
+
+    if last_user_limit(subs) < Time.now.to_i # 最終期限が現在以前の際の処理
+      subs.each do |subscription|
+        sub = Payjp::Subscription.retrieve(subscription.id)
+        sub.delete
+      end
+      plan.delete
+      self.destroy
+    else
+      raise StandardError, "Limit is not yet."
+    end
+  end
+
   def pause(service_id)
     # すべてのsubを取得する
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
@@ -31,5 +61,15 @@ class Service < ApplicationRecord
 
   def resume
     self.update(service_status: 'open')
+  end
+
+  private
+
+  def last_user_limit(subs)
+    last_limit = 0
+    subs.each do |sub|
+      last_limit = sub.current_period_end if last_limit <= sub.current_period_end
+    end
+    last_limit
   end
 end

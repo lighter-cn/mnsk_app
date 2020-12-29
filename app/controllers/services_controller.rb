@@ -10,12 +10,9 @@ class ServicesController < ApplicationController
   end
 
   def show
-    @order = Order.find_by user_id: current_user.id, service_id: params[:id] if user_signed_in?
-
-    unless @order.nil?
-      # payjpの処理
+    @order = Order.find_by user_id: current_user.id, service_id: params[:id]
+    unless @order.nil? # 購入済みならサブスク情報を持ってくる
       Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-      customer_token = current_user.card.customer_token
       @sub = Payjp::Subscription.retrieve(@order.subscription)
     end
   end
@@ -27,26 +24,20 @@ class ServicesController < ApplicationController
   def create
     @error = []
     begin
-      plan_name = "#{params[:service][:service_name]}_#{current_user.id}_#{Time.now.to_i}"
-      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-      plan = Payjp::Plan.create(
-        name: plan_name,
-        amount: params[:service][:price],
-        currency: 'jpy',
-        interval: 'month'
-      )
-    rescue StandardError => e
+      plan = Service.create_pln(params[:service][:service_name],current_user.id,params[:service][:price])
+    rescue => e
       @error << e.message
     end
 
-    begin
+    if plan.present?
       @service = Service.new(service_params(plan.id))
-    rescue StandardError => e
+    else
       @service = Service.new(service_params(0))
     end
+
     if @service.save
       redirect_to root_path
-    else
+    else 
       @error.push(insert_error_message(@service))
       @error.flatten!
       render :new
@@ -66,29 +57,12 @@ class ServicesController < ApplicationController
   end
 
   def destroy
-    @error = []
-    # payjp情報取得
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-    plan = Payjp::Plan.retrieve(@service.service_id)
-    subs = Payjp::Subscription.all(plan: @service.service_id)
-
     begin
-      # もし最終期限が現在以前なら
-      if last_user_limit(subs) < Time.now.to_i
-        # subを全削除
-        subs.each do |subscription|
-          sub = Payjp::Subscription.retrieve(subscription.id)
-          sub.delete
-        end
-        plan.delete
-        @service.destroy
-        redirect_to root_path
-      else
-        @error << 'Limit is not yet.'
-        render :edit
-      end
-    rescue StandardError => e
-      @error << e.message
+      @service.destroy_service @service
+      redirect_to root_path
+    rescue => exception
+      @error = []
+      @error << exception.message
       render :edit
     end
   end
@@ -131,14 +105,5 @@ class ServicesController < ApplicationController
     service.errors.full_messages.each do |error|
       arr << error
     end
-    arr
-  end
-
-  def last_user_limit(subs)
-    last_limit = 0
-    subs.each do |sub|
-      last_limit = sub.current_period_end if last_limit <= sub.current_period_end
-    end
-    last_limit
   end
 end
