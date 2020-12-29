@@ -18,7 +18,7 @@ class CardsController < ApplicationController
         customer_token: customer.id,
         user_id: current_user.id
       )
-    rescue => e
+    rescue StandardError => e
       @error = []
       @error << e.message
       render :new
@@ -37,6 +37,7 @@ class CardsController < ApplicationController
   def register_card?
     redirect_to root_path and return if current_user.card.present?
   end
+
   def pull_user
     @user = User.find(current_user.id)
   end

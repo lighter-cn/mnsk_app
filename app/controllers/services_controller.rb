@@ -84,10 +84,10 @@ class ServicesController < ApplicationController
         @service.destroy
         redirect_to root_path
       else
-        @error << "Limit is not yet."
+        @error << 'Limit is not yet.'
         render :edit
       end
-    rescue => e
+    rescue StandardError => e
       @error << e.message
       render :edit
     end
@@ -100,7 +100,7 @@ class ServicesController < ApplicationController
 
     # すべてのsubを停止する
     subs.each do |subscription|
-      if subscription.status == "active"
+      if subscription.status == 'active'
         sub = Payjp::Subscription.retrieve(subscription.id)
         sub.pause
       end
@@ -147,10 +147,10 @@ class ServicesController < ApplicationController
   end
 
   def last_user_limit(subs)
-    last_limit = 0;
+    last_limit = 0
     subs.each do |sub|
       last_limit = sub.current_period_end if last_limit <= sub.current_period_end
     end
-    return last_limit
+    last_limit
   end
 end

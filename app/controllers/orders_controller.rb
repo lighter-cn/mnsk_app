@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
 
   def create
     redirect_to new_card_path and return unless current_user.card.present? # カード未所持のときのリダイレクト
-    redirect_to service_path(params[:service_id]) and return unless @service_status == "open" # サブスク停止中の時のときのリダイレクト
+    redirect_to service_path(params[:service_id]) and return unless @service_status == 'open' # サブスク停止中の時のときのリダイレクト
 
     # payjpの処理
     customer_token = get_customer_token
@@ -37,13 +37,15 @@ class OrdersController < ApplicationController
 
   # サブスクの停止処理
   def pause
-    redirect_to service_path(params[:service_id]) and return unless @service.service_status == "open" # サブスク停止中の時のときのリダイレクト
+    redirect_to service_path(params[:service_id]) and return unless @service.service_status == 'open' # サブスク停止中の時のときのリダイレクト
+
     change_sub_status('pause')
   end
 
   # サブスクの再開処理
   def resume
-    redirect_to service_path(params[:service_id]) and return unless @service.service_status == "open" # サブスク停止中の時のときのリダイレクト
+    redirect_to service_path(params[:service_id]) and return unless @service.service_status == 'open' # サブスク停止中の時のときのリダイレクト
+
     change_sub_status('resume')
   end
 
