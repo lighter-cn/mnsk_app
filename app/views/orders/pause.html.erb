@@ -2,13 +2,13 @@
   <div class="content">
     <% if @error == nil %>
       <h2>購入を停止しました。</h2>
+      <p>
+        <%= Time.at(@sub.current_period_end).strftime("%Y年%m月%d日") %>まで利用可能です。<br>
+        購入を再開したい場合は、サービスの詳細画面より再開可能です。
+      </p>
     <% else %>
       <%= render 'shared/error', locals: {error: @error} %>
     <% end %>
-    <p>
-      <%= Time.at(@sub.current_period_end).strftime("%Y年%m月%d日") %>まで利用可能です。<br>
-      購入を再開したい場合は、サービスの詳細画面より再開可能です。
-    </p>
     <%= link_to "もどる", service_path(params[:service_id]), class: "mnsk-link"%>
   </div>
 </div>
