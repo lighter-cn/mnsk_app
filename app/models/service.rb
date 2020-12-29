@@ -13,4 +13,11 @@ class Service < ApplicationRecord
     validates :category_id,  numericality: { other_than: 1 }
     validates :images,       length: { maximum: 10 }
   end
+
+  def pause
+  end
+
+  def resume
+    self.update(service_status: 'open')
+  end
 end

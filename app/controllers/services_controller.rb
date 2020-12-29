@@ -1,9 +1,9 @@
 class ServicesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :pull_user
-  before_action :pull_service,       only: [:show, :edit, :update, :destroy, :pause, :resume]
-  before_action :is_owner?,          only: [:edit, :update, :destroy, :pause, :resume]
-  before_action :register_card?,     except: [:index, :show, :edit, :update, :pause, :resume]
+  before_action :pull_service,       except: [:index, :new, :create]
+  before_action :is_owner?,          except: [:index, :show, :new, :create]
+  before_action :register_card?,     only: [:new, :create]
 
   def index
     @services = Service.order('created_at DESC')
@@ -111,7 +111,7 @@ class ServicesController < ApplicationController
   end
 
   def resume
-    @service.update(service_status: 'open')
+    @service.resume
     redirect_to edit_service_path(params[:id])
   end
 
