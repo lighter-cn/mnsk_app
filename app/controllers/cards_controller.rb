@@ -7,7 +7,7 @@ class CardsController < ApplicationController
   end
 
   def create
-    begin
+    if params[:card_token] != "null"
       Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       customer = Payjp::Customer.create(
         description: 'test',
@@ -18,16 +18,11 @@ class CardsController < ApplicationController
         customer_token: customer.id,
         user_id: current_user.id
       )
-    rescue StandardError => e
-      @error = []
-      @error << e.message
-      render :new
-      return
-    end
-    if card.save
+      card.save
       redirect_to root_path
     else
-      @error = card.errors.full_messages
+      @error = []
+      @error << "No such token: null"
       render :new
     end
   end
