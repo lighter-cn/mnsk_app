@@ -14,7 +14,19 @@ class Service < ApplicationRecord
     validates :images,       length: { maximum: 10 }
   end
 
-  def pause
+  def pause(service_id)
+    # すべてのsubを取得する
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    subs = Payjp::Subscription.all(plan: service_id)
+
+    # すべてのsubを停止する
+    subs.each do |subscription|
+      if subscription.status == 'active'
+        sub = Payjp::Subscription.retrieve(subscription.id)
+        sub.pause
+      end
+    end
+    self.update(service_status: 'close')
   end
 
   def resume

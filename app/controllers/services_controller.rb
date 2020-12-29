@@ -94,19 +94,7 @@ class ServicesController < ApplicationController
   end
 
   def pause
-    # すべてのsubを取得する
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-    subs = Payjp::Subscription.all(plan: @service.service_id)
-
-    # すべてのsubを停止する
-    subs.each do |subscription|
-      if subscription.status == 'active'
-        sub = Payjp::Subscription.retrieve(subscription.id)
-        sub.pause
-      end
-    end
-
-    @service.update(service_status: 'close')
+    @service.pause(@service.service_id)
     redirect_to edit_service_path(params[:id])
   end
 
