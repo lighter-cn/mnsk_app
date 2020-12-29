@@ -1,6 +1,7 @@
 <div class="container main-wrapper">
   <div class="registration content">
     <h3>ユーザー情報更新</h3>
+    <%= render "devise/shared/error_messages", resource: @user %>
     <%= form_for(@user, url: user_path(current_user.id), method: :patch, class: 'registration-form') do |f| %>
       <div class="field">
         <%= f.label :name, "お名前" %><br />
