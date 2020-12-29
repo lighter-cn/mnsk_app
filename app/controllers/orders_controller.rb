@@ -3,25 +3,18 @@ class OrdersController < ApplicationController
   before_action :pull_service                            # サブスク情報取得
   before_action :pull_user                               # ユーザー情報取得
   before_action :is_owner?                               # サブスク出品者のチェック
-  before_action :already_buy?, except: [:pause, :resume] # 既にサブスク購入済みかのチェック
-  before_action :find_order, only: [:pause, :resume]     # orderの有無を確認
+  before_action :find_order                              # orderの有無を確認
+  before_action :did_buy? ,only:[:new, :create]          # 購入済みのリダイレクト
+  before_action :is_service_opened? ,only: [:new, :create, :pause, :resume] # サブスク停止中かチェック
 
   def new
     @order = Order.new
   end
 
   def create
-    redirect_to new_card_path and return unless current_user.card.present? # カード未所持のときのリダイレクト
-    redirect_to service_path(params[:service_id]) and return unless @service.service_status == 'open' # サブスク停止中の時のときのリダイレクト
+    redirect_to new_card_path and return unless current_user.card.present? # カード未登録のリダイレクト
+    sub = Order.create_sub(current_user.card.customer_token, @service.service_id)
 
-    # payjpの処理
-    customer_token = get_customer_token
-
-    # サブスクの購入
-    sub = Payjp::Subscription.create(
-      customer: customer_token,
-      plan: @service.service_id
-    )
     if !sub.id.nil?
       @order = Order.new(
         user_id: current_user.id,
@@ -37,16 +30,22 @@ class OrdersController < ApplicationController
 
   # サブスクの停止処理
   def pause
-    redirect_to service_path(params[:service_id]) and return unless @service.service_status == 'open' # サブスク停止中の時のときのリダイレクト
-
-    change_sub_status('pause')
+    begin
+      @sub = @order.pause(@order.subscription)
+    rescue StandardError => e
+      @error = []
+      @error << e.message
+    end
   end
 
   # サブスクの再開処理
   def resume
-    redirect_to service_path(params[:service_id]) and return unless @service.service_status == 'open' # サブスク停止中の時のときのリダイレクト
-
-    change_sub_status('resume')
+    begin
+      @sub = @order.resume(@order.subscription)
+    rescue StandardError => e
+      @error = []
+      @error << e.message
+    end
   end
 
   private
@@ -63,34 +62,15 @@ class OrdersController < ApplicationController
     redirect_to service_path(params[:service_id]) if current_user.id == @service.user_id
   end
 
-  def already_buy?
-    order = Order.find_by user_id: current_user.id, service_id: @service.id
-    redirect_to service_path(params[:service_id]) unless order.nil?
-  end
-
-  def get_customer_token
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-    current_user.card.customer_token
-  end
-
   def find_order
     @order = Order.find_by user_id: current_user.id, service_id: params[:service_id]
   end
 
-  def change_sub_status(status)
-    unless @order.nil?
-      customer_token = get_customer_token
-      @sub = Payjp::Subscription.retrieve(@order.subscription)
-      begin
-        if status == 'pause'
-          @sub.pause
-        elsif status == 'resume'
-          @sub.resume
-        end
-      rescue StandardError => e
-        @error = []
-        @error << e.message
-      end
-    end
+  def did_buy?
+    redirect_to service_path(params[:service_id]) unless @order.nil?
+  end
+
+  def is_service_opened?
+    redirect_to service_path(params[:service_id]) and return unless @service.service_status == 'open' # サブスク停止中の時のときのリダイレクト
   end
 end
