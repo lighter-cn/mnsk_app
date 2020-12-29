@@ -1,5 +1,10 @@
 <% @error.each do |error| %>
   <%# サブスクの停止処理重複時のエラー文言 %>
+  <% if error.start_with?("No such token: null") %>
+    <p>カード情報が間違っています。</p>
+  <% end %>
+
+  <%# サブスクの停止処理重複時のエラー文言 %>
   <% if error.start_with?("Subscription") && error.end_with?("has already been paused.") %>
     <h3>既にサブスクリプションは停止済みです。</h3>
   <% elsif error.start_with?("Subscription") && error.end_with?("has already been active.") %>
@@ -34,9 +39,9 @@
       先にサービス停止処理をしてください。
     </p>
   <% else %>
-    <p>
-    <%= error %>
-    </p>
+    <%# <p> %>
+    <%#= error %>
+    <%# </p> %>
   <% end %>
 
 <% end %>

@@ -1,8 +1,8 @@
 <div class="main-wrapper container">
   <div class="content registration">
+    <h2>Card Info</h2>
     <%= render partial: 'shared/error', error: @error unless @error == nil %>
     <%= form_with model:@card, url: cards_path, id: 'registration-form', class: 'registration-form',local: true do |f| %>
-      <h2>Card Info</h2>
       <div class='field'>
         <%= f.label :number, "カード番号" %><br>
         <%= f.text_field :number, class:"number", placeholder:"カード番号(半角英数)", maxlength:"16" %>
