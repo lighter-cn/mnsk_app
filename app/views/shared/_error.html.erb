@@ -1,5 +1,5 @@
 <% @error.each do |error| %>
-  <%# サブスクの停止処理重複時のエラー文言 %>
+  <%# カード登録字のエラー文言 %>
   <% if error.start_with?("No such token: null") %>
     <p>カード情報が間違っています。</p>
   <% end %>
