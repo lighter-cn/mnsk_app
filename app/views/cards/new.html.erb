@@ -1,6 +1,7 @@
 <div class="main-wrapper container">
   <div class="content registration">
-    <%= form_with  url: cards_path, id: 'registration-form', class: 'registration-form',local: true do |f| %>
+    <%= render partial: 'shared/error', error: @error unless @error == nil %>
+    <%= form_with model:@card, url: cards_path, id: 'registration-form', class: 'registration-form',local: true do |f| %>
       <h2>Card Info</h2>
       <div class='field'>
         <%= f.label :number, "カード番号" %><br>
@@ -26,7 +27,7 @@
       <div class="actions">
         <%= f.submit "登録する" , class:"button" %>
       </div>
-      <%= link_to "トップ", root_path, class: "mnsk-link"%>
     <% end %>
+    <%= link_to "トップ", root_path, class: "mnsk-link"%>
   </div>
 </div>
