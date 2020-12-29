@@ -53,7 +53,11 @@
       <% else %>
         <%# 購入者 %>
         <% if @order != nil %>
-          <%= link_to "QRコードを発行する", codes_path(order_id: @order.id,service_id: @service.id), method: :post, class: "mnsk-link"%>
+          <%= form_with model: @code, url: codes_path(order_id: @order.id,service_id: @service.id), id: 'service-form',method: :post,local: true do |f| %>
+              <div class="field">
+                <%= f.submit 'QRコード発行' %>
+              </div>
+            <% end %>
           <% if (@sub.status == "paused" || @sub.status == "canceled" ) && @service.service_status == "open" %>
             <%= form_with model: @order, url: resume_service_order_path(params[:id],@order.id), id: 'service-form',local: true do |f| %>
               <div class="field">
@@ -73,7 +77,7 @@
             </p>
           <% end %>
         <%# 非購入者 %>
-        <% elsif @service_status == "open" %>
+        <% elsif @service.service_status == "open" %>
           <%= link_to "購入する", new_service_order_path(params[:id]), class: "mnsk-link"%>
         <% end %>
       <% end %>
