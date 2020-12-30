@@ -18,7 +18,7 @@ class ServicesController < ApplicationController
   end
 
   def search
-    @services = Service.order('created_at DESC')
+    @services = Service.order('created_at DESC').page(params[:page]).per(20)
   end
 
   def new
