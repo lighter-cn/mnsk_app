@@ -1,6 +1,11 @@
 <div class="main-wrapper container">
   <div class="content">
-  <h2>サブスク検索</h2>
+    <h2>サブスク検索</h2>
+    <%= search_form_for @q ,url: search_services_path do |f| %>
+      <%= f.label :service_name_cont, "サブスク名" %>
+      <%= f.search_field :service_name_cont %>
+      <%= f.submit "検索" %>
+    <% end %>
     <div class="d-flex flex-wrap">
       <% @services.each do |service|%>
         <% if service.service_status != "deleted" %>

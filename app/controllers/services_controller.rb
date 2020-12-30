@@ -5,6 +5,8 @@ class ServicesController < ApplicationController
   before_action :is_owner?,          except: [:index, :show, :new, :create, :search]
   before_action :register_card?,     only: [:new, :create]
 
+  PER = 20 # ページネーションの1ページあたりの表示項目数
+
   def index
     @services = Service.order('created_at DESC').take(8)
   end
@@ -18,7 +20,8 @@ class ServicesController < ApplicationController
   end
 
   def search
-    @services = Service.order('created_at DESC').page(params[:page]).per(20)
+    @q = Service.ransack(params[:q])
+    @services = @q.result(distinct: true).page(params[:page]).per(PER)
   end
 
   def new
