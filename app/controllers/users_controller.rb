@@ -18,7 +18,6 @@ class UsersController < ApplicationController
 
     # オーダー取得
     @orders = Order.getBuyOrders(@user.id)
-
   end
 
   def edit

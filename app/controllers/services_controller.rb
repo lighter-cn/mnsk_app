@@ -20,9 +20,7 @@ class ServicesController < ApplicationController
   end
 
   def search
-    if !params[:q].nil?
-      params[:q][:category_id_eq]="" if params[:q][:category_id_eq]=="1"
-    end
+    params[:q][:category_id_eq] = '' if !params[:q].nil? && (params[:q][:category_id_eq] == '1')
     @q = Service.ransack(params[:q])
     @services = @q.result(distinct: true).page(params[:page]).per(PER)
   end
@@ -34,20 +32,20 @@ class ServicesController < ApplicationController
   def create
     @error = []
     begin
-      plan = Service.create_pln(params[:service][:service_name],current_user.id,params[:service][:price])
-    rescue => e
+      plan = Service.create_pln(params[:service][:service_name], current_user.id, params[:service][:price])
+    rescue StandardError => e
       @error << e.message
     end
 
-    if plan.present?
-      @service = Service.new(service_params(plan.id))
-    else
-      @service = Service.new(service_params(0))
-    end
+    @service = if plan.present?
+                 Service.new(service_params(plan.id))
+               else
+                 Service.new(service_params(0))
+               end
 
     if @service.save
       redirect_to root_path
-    else 
+    else
       @error.push(insert_error_message(@service))
       @error.flatten!
       render :new
@@ -67,14 +65,12 @@ class ServicesController < ApplicationController
   end
 
   def destroy
-    begin
-      @service.destroy_service @service
-      redirect_to root_path
-    rescue => exception
-      @error = []
-      @error << exception.message
-      render :edit
-    end
+    @service.destroy_service @service
+    redirect_to root_path
+  rescue StandardError => e
+    @error = []
+    @error << e.message
+    render :edit
   end
 
   def pause

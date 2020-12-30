@@ -4,8 +4,8 @@ class OrdersController < ApplicationController
   before_action :pull_user                               # ユーザー情報取得
   before_action :is_owner?                               # サブスク出品者のチェック
   before_action :find_order                              # orderの有無を確認
-  before_action :did_buy? ,only:[:new, :create]          # 購入済みのリダイレクト
-  before_action :is_service_opened? ,only: [:new, :create, :pause, :resume] # サブスク停止中かチェック
+  before_action :did_buy?, only: [:new, :create] # 購入済みのリダイレクト
+  before_action :is_service_opened?, only: [:new, :create, :pause, :resume] # サブスク停止中かチェック
 
   def new
     @order = Order.new
@@ -13,6 +13,7 @@ class OrdersController < ApplicationController
 
   def create
     redirect_to new_card_path and return unless current_user.card.present? # カード未登録のリダイレクト
+
     sub = Order.create_sub(current_user.card.customer_token, @service.service_id)
 
     if !sub.id.nil?
@@ -30,22 +31,18 @@ class OrdersController < ApplicationController
 
   # サブスクの停止処理
   def pause
-    begin
-      @sub = @order.pause(@order.subscription)
-    rescue StandardError => e
-      @error = []
-      @error << e.message
-    end
+    @sub = @order.pause(@order.subscription)
+  rescue StandardError => e
+    @error = []
+    @error << e.message
   end
 
   # サブスクの再開処理
   def resume
-    begin
-      @sub = @order.resume(@order.subscription)
-    rescue StandardError => e
-      @error = []
-      @error << e.message
-    end
+    @sub = @order.resume(@order.subscription)
+  rescue StandardError => e
+    @error = []
+    @error << e.message
   end
 
   private
