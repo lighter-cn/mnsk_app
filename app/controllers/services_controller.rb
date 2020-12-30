@@ -6,7 +6,7 @@ class ServicesController < ApplicationController
   before_action :register_card?,     only: [:new, :create]
 
   def index
-    @services = Service.order('created_at DESC')
+    @services = Service.order('created_at DESC').take(8)
   end
 
   def show
