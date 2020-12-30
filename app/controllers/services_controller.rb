@@ -20,6 +20,9 @@ class ServicesController < ApplicationController
   end
 
   def search
+    if !params[:q].nil?
+      params[:q][:category_id_eq]="" if params[:q][:category_id_eq]=="1"
+    end
     @q = Service.ransack(params[:q])
     @services = @q.result(distinct: true).page(params[:page]).per(PER)
   end
