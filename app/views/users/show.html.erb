@@ -20,9 +20,9 @@
     </div>
 
     <%# 出品中のサブスク情報 %>
-    <div class="own-sub">
-      <% if @services.length > 0 %>
-        <h3>出品中のサブスク：<%= @services.length %>つ</h3>
+    <% if @services.length > 0 %>
+      <div class="own-sub">
+        <h3>出品中のサブスク一覧</h3>
         <table>
           <tr>
             <td>サービス名</td>
@@ -35,8 +35,37 @@
             </tr>
           <% end %>
         </table>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
+
+    <%# 購入したサブスク情報 %>
+    <% if @orders.length > 0 %>
+      <div class="buy-sub">
+        <h3>購入したサブスク一覧</h3>
+        <table>
+          <tr>
+            <td>サービス名</td>
+            <td>ステータス</td>
+            <td>QRコード発行</td>
+          </tr>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= link_to order[:name], service_path(order[:service_id]) %></td>
+              <td><%= order[:status] %></td>
+              <% if order[:status]=="利用可" %>
+                <td>
+                  <%= form_with model: @code, url: codes_path(order_id: order[:id],service_id: order[:service_id]), id: 'service-form',method: :post,local: true do |f| %>
+                    <div class="field">
+                      <%= f.submit 'QRコード発行' %>
+                    </div>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    <% end %>
 
     <div class="card-info">
       <h3>カード情報</h3>

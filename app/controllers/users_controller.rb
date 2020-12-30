@@ -15,6 +15,10 @@ class UsersController < ApplicationController
 
     # サービス取得
     @services = Service.getServiceUserCount(@user.id)
+
+    # オーダー取得
+    @orders = Order.getBuyOrders(@user.id)
+
   end
 
   def edit
