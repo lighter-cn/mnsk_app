@@ -8,6 +8,9 @@ Rails.application.routes.draw do
       patch :pause
       patch :resume
     end
+    collection do
+      get 'search'
+    end
     resources :orders, only: [:new, :create] do
       member do
         patch :pause

@@ -15,12 +15,8 @@
     </ul>
   </div>
   <div class="subscriptions content">
-    <h2>サブスク一覧</h2>
-    <div class="sb">
-      <a href="/services/new" rel="nofollow"><button type="button" class="btn btn-outline-info">サブスクを作る</button></a>
-    </div>
+    <h2>新着のサブスク</h2>
     <div class="d-flex flex-wrap">
-
       <% @services.each do |service|%>
         <% if service.service_status != "deleted" %>
           <!-- card -->
@@ -32,12 +28,16 @@
             </a>
             <div class="card-body">
               <h5 class="card-title"><%= service.service_name %></h5>
+              <span class="badge badge-pill badge-success"><%= service.category.name %></span>
               <span class="badge badge-pill badge-warning">¥<%= service.price %></span>
             </div>
           </div>
         <% end %>
       <% end %>
-
+    </div>
+        <div class="sb">
+      <a href="/services/new" rel="nofollow"><button type="button" class="btn btn-outline-info">サブスクを作る</button></a>
+      <a href="/services/search" rel="nofollow"><button type="button" class="btn btn-outline-success">サブスクを探す</button></a>
     </div>
   </div>
 </div>
