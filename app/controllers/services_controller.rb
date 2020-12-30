@@ -1,8 +1,8 @@
 class ServicesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :search]
   before_action :pull_user
-  before_action :pull_service,       except: [:index, :new, :create]
-  before_action :is_owner?,          except: [:index, :show, :new, :create]
+  before_action :pull_service,       except: [:index, :new, :create, :search]
+  before_action :is_owner?,          except: [:index, :show, :new, :create, :search]
   before_action :register_card?,     only: [:new, :create]
 
   def index
@@ -15,6 +15,10 @@ class ServicesController < ApplicationController
       Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       @sub = Payjp::Subscription.retrieve(@order.subscription)
     end
+  end
+
+  def search
+    @services = Service.order('created_at DESC')
   end
 
   def new
