@@ -12,6 +12,9 @@ class UsersController < ApplicationController
     else
       @card = nil
     end
+
+    # サービス取得
+    @services = Service.getServiceUserCount(@user.id)
   end
 
   def edit
