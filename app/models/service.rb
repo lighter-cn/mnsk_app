@@ -63,6 +63,20 @@ class Service < ApplicationRecord
     self.update(service_status: 'open')
   end
 
+  #サービスごとの利用者数を取得
+  def self.getServiceUserCount uid
+    service_user = []
+    services = Service.where('user_id=?',uid)
+    if services.length > 0 
+      services.each do |service|
+        service_name = service.service_name
+        count = Order.where('service_id=?',service.id)
+        service_user << {id: service.id,name: service_name,num: count}
+      end
+    end
+    return service_user
+  end
+
   private
 
   def last_user_limit(subs)
