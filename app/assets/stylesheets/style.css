@@ -100,8 +100,17 @@ footer {
   margin-bottom: 16px;
   padding-top: 16px;
 }
-.card-image {max-height: 180px}
-.card-body{padding: 20px 0}
+.card-img {
+  width: 100%;
+  padding-top: 100%;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+.card-body{padding: 10px 0}
+.card-title {
+  font-size: 16px;
+  margin-top: 10px;
+}
 
 /* new / edit */
 .service-new .field,
