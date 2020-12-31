@@ -100,8 +100,17 @@ footer {
   margin-bottom: 16px;
   padding-top: 16px;
 }
-.card-image {max-height: 180px}
-.card-body{padding: 20px 0}
+.card-img {
+  width: 100%;
+  padding-top: 100%;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+.card-body{padding: 10px 0}
+.card-title {
+  font-size: 16px;
+  margin-top: 10px;
+}
 
 /* new / edit */
 .service-new .field,
@@ -115,17 +124,30 @@ footer {
   height: auto;
 }
 /* show */
+.service-show_title {
+  font-size: 24px;
+  width: 90%;
+  margin: 0 auto 20px;
+}
 .service-show .carousel {margin-bottom: 30px}
 .service-show .carousel {
-  height: 500px;
-  line-height: 500px;
+  height: 400px;
+  line-height: 400px;
 }
-.service-show .images {
-  width: 500px;
-  height: auto;
+.service-img{
+  width: 400px;
+  height: 400px;
+  background-size: cover;
+  background-position: 50% 50%;
+  margin: 0 auto;
 }
 .carousel-control-next,
 .carousel-control-prev {filter: invert(100%)}
+.service-show_info {
+  width: 90%;
+  margin: 0 auto;
+}
+.service-button {margin-top: 40px;}
 
 /* order ***************************************/
 

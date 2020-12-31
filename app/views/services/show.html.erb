@@ -1,6 +1,6 @@
 <div class="main-wrapper container">
   <div class="service-show content">
-    <h2><%= @service.service_name %></h2>
+    <h2 class="service-show_title"><%= @service.service_name %></h2>
     <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <% count = 0 %>
@@ -23,7 +23,7 @@
             <% else %>
             <div class="carousel-item">
             <% end %>
-              <%= image_tag image, class:'images card-img"' %>
+              <div class="service-img" style="background-image:url(<%= rails_blob_path(@service.images[count_image]) %>)"></div>
             </div>
             <% count_image += 1 %>
           <% end %>
@@ -37,10 +37,12 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-    <p>カテゴリー：<%= @service.category.name %></p>
-    <p>内容：<%= @service.explanation %></p>
-    <p>月額：¥<%= @service.price %></p>
-    <p>出品者：<%= @service.user.name %></p>
+    <div class="service-show_info">
+      <p>カテゴリー：<%= @service.category.name %></p>
+      <p>内容：<%= @service.explanation %></p>
+      <p>月額：¥<%= @service.price %></p>
+      <p>出品者：<%= @service.user.name %></p>
+    </div>
   </div>
 
   <div class="service-button content">

@@ -23,13 +23,13 @@
           <div class="card col-12 col-sm-6 col-md-4 col-xl-3" style="width: 18rem;">
             <a href=<%= "/services/#{service.id}" %>>
               <div class="card-image-wrapper">
-                <%= image_tag service.images[0], class:"card-img" %>
+                <div class="card-img" style="background-image:url(<%= rails_blob_path(service.images[0]) %>)"></div>
               </div>
             </a>
             <div class="card-body">
-              <h5 class="card-title"><%= service.service_name %></h5>
               <span class="badge badge-pill badge-success"><%= service.category.name %></span>
               <span class="badge badge-pill badge-warning">¥<%= service.price %></span>
+              <h5 class="card-title"><%= service.service_name %></h5>
             </div>
           </div>
         <% end %>
