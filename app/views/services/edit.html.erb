@@ -27,10 +27,10 @@
         <%= f.collection_select(:category_id, Category.all, :id, :name, {} , {class:"category-select"}) %><br>
       </div>
 
-      <div id="image-list" class="d-flex flex-wrap">
-        <% @service.images.each do |image| %>
-          <div class="imageElement">
-            <%= image_tag image %>
+      <div id="image-list" class="d-flex flex-wrap justify-content-center">
+        <% @service.images.each_with_index do |image,i| %>
+          <div class="edit-img-wrapper col-4 col-lg-3 col-xl-2">
+            <div class="edit-img" style="background-image:url(<%= rails_blob_path(@service.images[i]) %>)"></div>
           </div>
         <% end %>
       </div>
