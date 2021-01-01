@@ -1,6 +1,7 @@
-if (document.URL.match( /services/ )) {
+if (document.URL.match( /services/ )&&document.URL.match( /new/ )) {
   document.addEventListener('DOMContentLoaded', function(){
     const ImageList = document.getElementById('image-list');
+
     let imageElementNum = 1;
 
     const createImageHTML = (blob,number) => {
