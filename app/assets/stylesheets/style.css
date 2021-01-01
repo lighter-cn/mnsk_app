@@ -125,6 +125,13 @@ footer {
   max-width: 200px;
   height: auto;
 }
+.blobImage {
+  width: 100%;
+  padding-top: 100%;
+  background-size: cover;
+  background-position: 50% 50%;
+  margin-bottom: 20px;
+}
 .edit-img{
   width: 100%;
   padding-top: 100%;
