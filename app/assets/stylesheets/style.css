@@ -234,7 +234,12 @@ footer {
   margin: 20px auto 0;
 }
 
-.service-button {margin-top: 40px;}
+.service-button {
+  margin-top: 40px;
+}
+.service-button input{
+  margin-bottom: 20px;
+}
 
 /* order ***************************************/
 
