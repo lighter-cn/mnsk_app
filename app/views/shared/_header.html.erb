@@ -4,9 +4,8 @@
   <a href="/"><%= image_tag "logo.png", class:"logo-img" %></a>
   <div class="d-flex align-items-center">
     <% if user_signed_in? %>
-      <%= link_to @user.name, user_path(current_user),class: 'user-name' %>
       <div class="header_button_wrapper">
-        <a href="/services/new" rel="nofollow"><button type="button" class="btn btn-outline-info">サブスクを作る</button></a>
+        <a href=<%= "/users/#{current_user.id}" %> rel="nofollow"><button type="button" class="btn btn-outline-info"><%= @user.name %></button></a>
         <a href="/users/sign_out" rel="nofollow" data-method="delete"><button type="button" class="btn btn-outline-danger">ログアウト</button></a>
       </div>
 
