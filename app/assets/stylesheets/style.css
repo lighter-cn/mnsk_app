@@ -96,7 +96,22 @@ footer {
 .user .link {color: #c725c7;}
 .user .link:hover {color: #06b45d;}
 .user table{margin: 0 auto}
-.user table tr td {padding-bottom: 16px}
+.user table tr td {
+  padding-bottom: 16px;
+}
+.user-info table tr :first-child,
+.card-info table tr :first-child {padding-right: 20px}
+.own-sub table,
+.buy-sub table{
+  width: 90%;
+  background-color: rgb(230, 230, 230);
+  margin-bottom: 20px;
+}
+.own-sub table tr td,
+.buy-sub table tr td{
+  padding: 8px;
+  border: 1px solid #fff;
+}
 
 
 /* service *************************************/
