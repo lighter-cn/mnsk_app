@@ -9,7 +9,7 @@
         <%# カテゴリー %>
         <%= f.label :category_id_eq, "カテゴリー" %>
         <%= f.collection_select(:category_id_eq , Category.all, :id, :name, {},{}) %>
-        <%= f.submit "検索" %>
+        <%= f.submit "検索", class: "std_btn" %>
       <% end %>
     </div>
 
@@ -23,18 +23,7 @@
       <% @services.each do |service|%>
         <% if service.service_status != "deleted" %>
           <!-- card -->
-          <div class="card col-12 col-sm-6 col-md-4 col-xl-3" style="width: 18rem;">
-            <a href=<%= "/services/#{service.id}" %>>
-              <div class="card-image-wrapper">
-                <div class="card-img" style="background-image:url(<%= rails_blob_path(service.images[0]) %>)"></div>
-              </div>
-            </a>
-            <div class="card-body">
-              <span class="badge badge-pill badge-success"><%= service.category.name %></span>
-              <span class="badge badge-pill badge-warning">¥<%= service.price %></span>
-              <h5 class="card-title"><%= service.service_name %></h5>
-            </div>
-          </div>
+          <%= render partial: "/shared/service_card", locals: { service: service } %>
         <% end %>
       <% end %>
     </div>
