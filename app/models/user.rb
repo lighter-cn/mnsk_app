@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :services, dependent: :destroy
 
   with_options presence: true do
-    validates :name,     length: { maximum: 15, minimum: 3 }
+    validates :name,     length: { maximum: 8, minimum: 3 }
     validates :birthday
   end
 end

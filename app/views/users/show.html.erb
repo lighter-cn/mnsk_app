@@ -16,7 +16,7 @@
           <td><%= @user.email %></td>
         </tr>
       </table>
-      <%= link_to "ユーザー情報を編集する", edit_user_path, class: "link" %>
+      <%= link_to "ユーザー情報を編集する", edit_user_path, class: "mnsk-link" %>
     </div>
 
     <%# 出品中のサブスク情報 %>
@@ -30,7 +30,7 @@
           </tr>
           <% @services.each do |service| %>
             <tr>
-              <td><%= link_to service[:name], service_path(service[:id]) %></td>
+              <td><%= link_to service[:name], service_path(service[:id]),class: "link" %></td>
               <td><%= service[:num].length %></td>
             </tr>
           <% end %>
@@ -50,13 +50,13 @@
           </tr>
           <% @orders.each do |order| %>
             <tr>
-              <td><%= link_to order[:name], service_path(order[:service_id]) %></td>
+              <td><%= link_to order[:name], service_path(order[:service_id]), class: "link" %></td>
               <td><%= order[:status] %></td>
               <% if order[:status]=="利用可" %>
                 <td>
                   <%= form_with model: @code, url: codes_path(order_id: order[:id],service_id: order[:service_id]), id: 'service-form',method: :post,local: true do |f| %>
                     <div class="field">
-                      <%= f.submit 'QRコード発行' %>
+                      <%= f.submit 'QRコード', class: "std_btn" %>
                     </div>
                   <% end %>
                 </td>
@@ -82,9 +82,12 @@
         </table>
       <% else %>
         <p>まだカードを登録していません。</p>
-        <%= link_to "クレジットカードを登録する", new_card_path, class: "link" %>
+        <%= link_to "クレジットカードを登録する", new_card_path, class: "mnsk-link" %>
       <% end %>
     </div>
-    <%= link_to "トップ", root_path, class: "mnsk-link"%>
+
+    <div class="menu">
+      <%= link_to "トップ", root_path, class: "mnsk-link"%>
+    </div>
   </div>
 </div>

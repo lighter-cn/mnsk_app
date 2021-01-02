@@ -57,19 +57,19 @@
         <% if @order != nil %>
           <%= form_with model: @code, url: codes_path(order_id: @order.id,service_id: @service.id), id: 'service-form',method: :post,local: true do |f| %>
               <div class="field">
-                <%= f.submit 'QRコード発行' %>
+                <%= f.submit 'QRコード発行', class: "std_btn" %>
               </div>
             <% end %>
           <% if (@sub.status == "paused" || @sub.status == "canceled" ) && @service.service_status == "open" %>
             <%= form_with model: @order, url: resume_service_order_path(params[:id],@order.id), id: 'service-form',local: true do |f| %>
               <div class="field">
-                <%= f.submit '再開' %>
+                <%= f.submit '再開', class: "std_btn"  %>
               </div>
             <% end %>
           <% elsif @service.service_status == "open" %>
             <%= form_with model: @order, url: pause_service_order_path(params[:id],@order.id), id: 'service-form',local: true do |f| %>
               <div class="field">
-                <%= f.submit '停止' %>
+                <%= f.submit '停止', class: "std_btn"  %>
               </div>
             <% end %>
           <% else %>

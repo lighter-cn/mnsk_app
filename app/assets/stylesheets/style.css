@@ -7,17 +7,40 @@ h2 {
   font-size: 48px;
   margin-bottom: 30px;
 }
+@media screen and (max-width:576px) { 
+  h2 { font-size: 28px}
+}
 h3 {
   font-size: 40px;
   margin-bottom: 30px;
 }
+@media screen and (max-width:576px) { 
+  h3 { font-size: 24px}
+}
 p {font-size: 18px}
+@media screen and (max-width:576px) { 
+  p { font-size: 14px}
+}
 
 .hidden {display: none;}
 
+.std_btn{
+  border: none;
+  border-radius: 10px;
+  padding: 5px 20px;
+  background-color: #05a728;
+  color: rgb(247, 247, 247);
+}
+.std_btn:hover{
+  background-color: #06741e;
+}
+.menu{
+  margin-top: 40px;
+}
+
 /* header **************************************/
 header {
-  height: 100px;
+  padding: 20px;
   border-bottom: 3px solid #777;
 }
 .logo-img {
@@ -26,7 +49,27 @@ header {
 }
 .user-name {
   margin-right: 20px;
-  font-size: 24px;
+  font-size: 20px;
+}
+.header_button_wrapper{
+  display: flex;
+  justify-content: space-between;
+}
+.header_button_wrapper :first-child{margin-right: 10px;}
+@media screen and (max-width:576px) { 
+  .user-name {font-size: 14px;}
+  header .btn{font-size: 12px;}
+  .header_button_wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+  .header_button_wrapper :first-child{
+    margin-right: 0px;
+    margin-bottom: 5px;
+  }
+  .header_button_wrapper :last-child{
+    text-align: right;
+  }
 }
 .user-name:hover {
   text-decoration: none;
@@ -82,18 +125,39 @@ footer {
 .user .link {color: #c725c7;}
 .user .link:hover {color: #06b45d;}
 .user table{margin: 0 auto}
-.user table tr td {padding-bottom: 16px}
+.user table tr td {
+  padding-bottom: 16px;
+}
+.user-info table tr :first-child,
+.card-info table tr :first-child {padding-right: 20px}
+.own-sub table,
+.buy-sub table{
+  width: 90%;
+  background-color: rgb(230, 230, 230);
+  margin-bottom: 20px;
+}
+.own-sub table tr td,
+.buy-sub table tr td{
+  padding: 8px;
+  border: 1px solid #fff;
+}
 
 
 /* service *************************************/
 /* about-mnsk */
 .about-mnsk {margin-bottom: 90px}
+@media screen and (max-width:576px) { 
+  .about-mnsk {margin-bottom: 30px}
+}
 .about-mnsk p {margin-bottom: 30px}
 .about-mnsk ul {
   list-style: none;
   padding: 0;
 }
 .about-mnsk li {font-size: 28px}
+@media screen and (max-width:576px) { 
+  .about-mnsk li {font-size: 20px}
+}
 
 /* subscriptions */
 .sb {margin-bottom: 30px}
@@ -145,25 +209,37 @@ footer {
   width: 90%;
   margin: 0 auto 20px;
 }
-.service-show .carousel {margin-bottom: 30px}
 .service-show .carousel {
-  height: 400px;
-  line-height: 400px;
+  width: 100%;
 }
 .service-img{
   width: 400px;
   height: 400px;
+  padding-top: 0;
   background-size: cover;
   background-position: 50% 50%;
   margin: 0 auto;
+}
+@media screen and (max-width:576px) { 
+  .service-img{
+    width: 90%;
+    height: 0;
+    padding-top: 90%;
+  }
 }
 .carousel-control-next,
 .carousel-control-prev {filter: invert(100%)}
 .service-show_info {
   width: 90%;
-  margin: 0 auto;
+  margin: 20px auto 0;
 }
-.service-button {margin-top: 40px;}
+
+.service-button {
+  margin-top: 40px;
+}
+.service-button input{
+  margin-bottom: 20px;
+}
 
 /* order ***************************************/
 

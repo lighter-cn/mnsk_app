@@ -1,43 +1,25 @@
 <div class="main-wrapper container">
   <div class="about-mnsk content">
-    <h2>みんスクについて</h2>
+    <h2>みんスクとは？</h2>
     <p>
-      みんスク（みんなのサブスク）は、誰でも自由にサービスをサブスクリプションとして提供、<br>
-      あるいは購入できるプラットフォームです。<br>
-      登録は簡単！すぐにサービスを開始することも購入することも可能です。<br>
-      お気に入りのサービスを見つけて早速使ってみましょう！
+      みんスク（みんなのサブスク）は、誰でも自由にサブスクを作ったり、<br>
+      登録できるプラットフォームです。<br>
+      サブスクを作るも使うもあなた次第！
     </p>
-    <h3>みんスクの特徴</h3>
-    <ul>
-      <li>３分で登録完了</li>
-      <li>すぐに出品できる手軽さ</li>
-      <li>その場で購入できる使いやすさ</li>
-    </ul>
   </div>
   <div class="subscriptions content">
     <h2>新着のサブスク</h2>
+    <div class="sb">
+      <a href="/services/new" rel="nofollow"><button type="button" class="btn btn-outline-info">サブスクを作る</button></a>
+      <a href="/services/search" rel="nofollow"><button type="button" class="btn btn-outline-success">サブスクを探す</button></a>
+    </div>
     <div class="d-flex flex-wrap">
       <% @services.each do |service|%>
         <% if service.service_status != "deleted" %>
           <!-- card -->
-          <div class="card col-12 col-sm-6 col-md-4 col-xl-3" style="width: 18rem;">
-            <a href=<%= "/services/#{service.id}" %>>
-              <div class="card-image-wrapper">
-                <div class="card-img" style="background-image:url(<%= rails_blob_path(service.images[0]) %>)"></div>
-              </div>
-            </a>
-            <div class="card-body">
-              <span class="badge badge-pill badge-success"><%= service.category.name %></span>
-              <span class="badge badge-pill badge-warning">¥<%= service.price %></span>
-              <h5 class="card-title"><%= service.service_name %></h5>
-            </div>
-          </div>
+          <%= render partial: "/shared/service_card", locals: { service: service } %>
         <% end %>
       <% end %>
-    </div>
-        <div class="sb">
-      <a href="/services/new" rel="nofollow"><button type="button" class="btn btn-outline-info">サブスクを作る</button></a>
-      <a href="/services/search" rel="nofollow"><button type="button" class="btn btn-outline-success">サブスクを探す</button></a>
     </div>
   </div>
 </div>

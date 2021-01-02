@@ -1,16 +1,20 @@
 <%# header %>
-<div class="header-wrapper container-fluid">
-  <header class="container d-flex justify-content-between align-items-center">
-    <a href="/"><%= image_tag "logo.png", class:"logo-img" %></a>
-    <div>
-      <% if user_signed_in? %>
-        <%= link_to @user.name, user_path(current_user),class: 'user-name' %>
-        <a href="/services/new" rel="nofollow"><button type="button" class="btn btn-outline-info">サブスクを作る</button></a>
-        <a href="/users/sign_out" rel="nofollow" data-method="delete"><button type="button" class="btn btn-outline-danger">log out</button></a>
-      <% else %>
-        <a href="/users/sign_up" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-primary">sign up</button></a>
-        <a href="/users/sign_in" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-info">log in</button></a>
-      <% end %>
-    </div>
-  </header>
-</div>
+
+<header class="container-fluid d-flex justify-content-between align-items-center">
+  <a href="/"><%= image_tag "logo.png", class:"logo-img" %></a>
+  <div class="d-flex align-items-center">
+    <% if user_signed_in? %>
+      <div class="header_button_wrapper">
+        <a href=<%= "/users/#{current_user.id}" %> rel="nofollow"><button type="button" class="btn btn-outline-info"><%= @user.name %></button></a>
+        <a href="/users/sign_out" rel="nofollow" data-method="delete"><button type="button" class="btn btn-outline-danger">ログアウト</button></a>
+      </div>
+
+    <% else %>
+      <div class="header_button_wrapper">
+        <a href="/users/sign_up" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-primary">新規登録</button></a>
+        <a href="/users/sign_in" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-info">ログイン</button></a>
+      </div>
+
+    <% end %>
+  </div>
+</header>
