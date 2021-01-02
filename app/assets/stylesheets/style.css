@@ -7,11 +7,20 @@ h2 {
   font-size: 48px;
   margin-bottom: 30px;
 }
+@media screen and (max-width:576px) { 
+  h2 { font-size: 28px}
+}
 h3 {
   font-size: 40px;
   margin-bottom: 30px;
 }
+@media screen and (max-width:576px) { 
+  h3 { font-size: 24px}
+}
 p {font-size: 18px}
+@media screen and (max-width:576px) { 
+  p { font-size: 14px}
+}
 
 .hidden {display: none;}
 
@@ -31,7 +40,7 @@ p {font-size: 18px}
 
 /* header **************************************/
 header {
-  height: 100px;
+  padding: 20px;
   border-bottom: 3px solid #777;
 }
 .logo-img {
@@ -41,6 +50,26 @@ header {
 .user-name {
   margin-right: 20px;
   font-size: 24px;
+}
+.header_button_wrapper{
+  display: flex;
+  justify-content: space-between;
+}
+.header_button_wrapper :first-child{margin-right: 10px;}
+@media screen and (max-width:576px) { 
+  .user-name {font-size: 12px;}
+  header .btn{font-size: 12px;}
+  .header_button_wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+  .header_button_wrapper :first-child{
+    margin-right: 0px;
+    margin-bottom: 5px;
+  }
+  .header_button_wrapper :last-child{
+    text-align: right;
+  }
 }
 .user-name:hover {
   text-decoration: none;
@@ -117,12 +146,18 @@ footer {
 /* service *************************************/
 /* about-mnsk */
 .about-mnsk {margin-bottom: 90px}
+@media screen and (max-width:576px) { 
+  .about-mnsk {margin-bottom: 30px}
+}
 .about-mnsk p {margin-bottom: 30px}
 .about-mnsk ul {
   list-style: none;
   padding: 0;
 }
 .about-mnsk li {font-size: 28px}
+@media screen and (max-width:576px) { 
+  .about-mnsk li {font-size: 20px}
+}
 
 /* subscriptions */
 .sb {margin-bottom: 30px}
