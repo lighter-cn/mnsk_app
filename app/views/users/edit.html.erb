@@ -14,7 +14,9 @@
       <div class="actions">
         <%= f.submit "更新", class: "std_btn" %>
       </div>
-      <%= link_to "もどる", user_path(params[:id]), class: "mnsk-link"%>
+      <div class="link-wrapper">
+        <%= link_to "もどる", user_path(params[:id]), class: "mnsk-link"%>
+      </div>
     <% end %>
   </div>
 </div>

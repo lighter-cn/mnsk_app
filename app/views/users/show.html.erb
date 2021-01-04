@@ -1,6 +1,5 @@
 <div class="container main-wrapper">
-  <div class="user content">
-    <div class="user-info">
+    <div class="content">
       <h2>ユーザー情報</h2>
       <table>
         <tr>
@@ -15,15 +14,30 @@
           <td>メールアドレス</td>
           <td><%= @user.email %></td>
         </tr>
+          <tr>
+          <% if @card.present? %>
+            <td>カード番号</td>
+            <td><%= "**** **** **** " + @card[:last4] %></td>
+          </tr>
+          <tr>
+            <td>有効期限</td>
+            <td><%= @card[:exp_month] %> / <%= @card[:exp_year] %></td>
+          </tr>
+        <% end %>
       </table>
-      <%= link_to "ユーザー情報を編集する", edit_user_path, class: "mnsk-link" %>
+      <div class="link-wrapper">
+        <%= link_to "編集", edit_user_path, class: "mnsk-link" %>
+        <% unless @card.present? %>
+          <%= link_to "カード登録", new_card_path, class: "mnsk-link" %>
+        <% end %>
+      </div>
     </div>
 
     <%# 出品中のサブスク情報 %>
     <% if @services.length > 0 %>
-      <div class="own-sub">
+      <div class="content">
         <h3>出品中のサブスク一覧</h3>
-        <table>
+        <table class="users-table">
           <tr>
             <td>サービス名</td>
             <td>購入者数</td>
@@ -40,9 +54,9 @@
 
     <%# 購入したサブスク情報 %>
     <% if @orders.length > 0 %>
-      <div class="buy-sub">
+      <div class="content">
         <h3>購入したサブスク一覧</h3>
-        <table>
+        <table class="users-table">
           <tr>
             <td>サービス名</td>
             <td>ステータス</td>
@@ -55,9 +69,7 @@
               <% if order[:status]=="利用可" %>
                 <td>
                   <%= form_with model: @code, url: codes_path(order_id: order[:id],service_id: order[:service_id]), id: 'service-form',method: :post,local: true do |f| %>
-                    <div class="field">
-                      <%= f.submit 'QRコード', class: "std_btn" %>
-                    </div>
+                    <%= f.submit 'QRコード', class: "std_btn" %>
                   <% end %>
                 </td>
               <% end %>
@@ -67,27 +79,9 @@
       </div>
     <% end %>
 
-    <div class="card-info">
-      <h3>カード情報</h3>
-      <% if @card.present? %>
-        <table>
-          <tr>
-            <td>カード番号</td>
-            <td><%= "**** **** **** " + @card[:last4] %></td>
-          </tr>
-          <tr>
-            <td>有効期限</td>
-            <td><%= @card[:exp_month] %> / <%= @card[:exp_year] %></td>
-          </tr>
-        </table>
-      <% else %>
-        <p>まだカードを登録していません。</p>
-        <%= link_to "クレジットカードを登録する", new_card_path, class: "mnsk-link" %>
-      <% end %>
+    <div class="content">
+      <div class="link-wrapper">
+        <%= link_to "トップ", root_path, class: "mnsk-link"%>
+      </div>
     </div>
-
-    <div class="menu">
-      <%= link_to "トップ", root_path, class: "mnsk-link"%>
-    </div>
-  </div>
 </div>

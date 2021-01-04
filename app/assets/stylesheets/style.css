@@ -24,18 +24,53 @@ p {font-size: 18px}
 
 .hidden {display: none;}
 
+/* button */
 .std_btn{
+  font-size: 18px;
+  line-height: 18px;
   border: none;
   border-radius: 10px;
   padding: 5px 20px;
   background-color: #05a728;
   color: rgb(247, 247, 247);
 }
-.std_btn:hover{
-  background-color: #06741e;
+.std_btn:hover{background-color: #06741e}
+
+/* link */
+.link {color: #c725c7;}
+.link:hover {color: #06b45d;}
+
+.mnsk-link {
+  background-color: #eeeeee;
+  color: #07bd62;
+  padding: 8px 16px;
+  border-radius: 12px;
+  transition: all, .2s;
 }
-.menu{
-  margin-top: 40px;
+.mnsk-link:hover {
+  background-color: #dbdbdb;
+  color: #05914b;
+  text-decoration: none;
+  transition: all, .2s;
+}
+
+.link-wrapper {margin: 20px 0;}
+
+.main-wrapper {padding: 60px 0 0;}
+.content {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+/* table */
+table{
+  margin: 0 auto;
+  width: 90%;
+  background-color: rgb(230, 230, 230);
+}
+table tr td {
+  border: 1px solid #fff;
+  line-height: 36px;
 }
 
 /* header **************************************/
@@ -85,23 +120,6 @@ footer {
   text-align: center;
 }
 
-/* main ****************************************/
-.main-wrapper {padding: 60px 0;}
-.content {text-align: center;}
-.mnsk-link {
-  background-color: #eeeeee;
-  color: #07bd62;
-  padding: 8px;
-  border-radius: 12px;
-  transition: all, .2s;
-}
-.mnsk-link:hover {
-  background-color: #dbdbdb;
-  color: #05914b;
-  text-decoration: none;
-  transition: all, .2s;
-}
-
 /* registration ********************************/
 .registration label {
   font-size: 18px;
@@ -119,29 +137,6 @@ footer {
   width: 200px;
   margin: 0 auto;
 }
-
-/* user ****************************************/
-.user-info {margin-bottom: 45px;}
-.user .link {color: #c725c7;}
-.user .link:hover {color: #06b45d;}
-.user table{margin: 0 auto}
-.user table tr td {
-  padding-bottom: 16px;
-}
-.user-info table tr :first-child,
-.card-info table tr :first-child {padding-right: 20px}
-.own-sub table,
-.buy-sub table{
-  width: 90%;
-  background-color: rgb(230, 230, 230);
-  margin-bottom: 20px;
-}
-.own-sub table tr td,
-.buy-sub table tr td{
-  padding: 8px;
-  border: 1px solid #fff;
-}
-
 
 /* service *************************************/
 /* about-mnsk */
