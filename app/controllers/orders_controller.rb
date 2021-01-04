@@ -71,6 +71,6 @@ class OrdersController < ApplicationController
   end
 
   def is_service_opened?
-    redirect_to service_path(params[:service_id]) and return unless @service.service_status == 'open' # サブスク停止中の時のときのリダイレクト
+    redirect_to service_path(params[:service_id]) and return unless @service.service_status == 'open'
   end
 end
