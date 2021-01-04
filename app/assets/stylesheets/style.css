@@ -31,6 +31,7 @@ p {font-size: 18px}
   border: none;
   border-radius: 10px;
   padding: 5px 20px;
+  margin: 0 5px;
   background-color: #05a728;
   color: rgb(247, 247, 247);
 }
@@ -139,23 +140,7 @@ footer {
 }
 
 /* service *************************************/
-/* about-mnsk */
-.about-mnsk {margin-bottom: 90px}
-@media screen and (max-width:576px) { 
-  .about-mnsk {margin-bottom: 30px}
-}
-.about-mnsk p {margin-bottom: 30px}
-.about-mnsk ul {
-  list-style: none;
-  padding: 0;
-}
-.about-mnsk li {font-size: 28px}
-@media screen and (max-width:576px) { 
-  .about-mnsk li {font-size: 20px}
-}
-
 /* subscriptions */
-.sb {margin-bottom: 30px}
 .card {
   border: none;
   margin-bottom: 16px;
@@ -204,10 +189,8 @@ footer {
   width: 90%;
   margin: 0 auto 20px;
 }
-.service-show .carousel {
-  width: 100%;
-}
-.service-img{
+.carousel {width: 100%;}
+.carousel-img{
   width: 400px;
   height: 400px;
   padding-top: 0;
@@ -216,7 +199,7 @@ footer {
   margin: 0 auto;
 }
 @media screen and (max-width:576px) { 
-  .service-img{
+  .carousel-img{
     width: 90%;
     height: 0;
     padding-top: 90%;
@@ -224,17 +207,8 @@ footer {
 }
 .carousel-control-next,
 .carousel-control-prev {filter: invert(100%)}
-.service-show_info {
-  width: 90%;
-  margin: 20px auto 0;
-}
-
-.service-button {
-  margin-top: 40px;
-}
-.service-button input{
-  margin-bottom: 20px;
-}
+.service-show_info {  margin: 20px auto ;}
+.service-button input{margin-bottom: 20px;}
 
 /* order ***************************************/
 

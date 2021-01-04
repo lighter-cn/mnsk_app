@@ -19,6 +19,10 @@
       <%= sort_link(@q, :created_at, '開始日') %>
     </div>
 
+    <div class="link-wrapper">
+      <a href="/services/new" rel="nofollow"><button type="button" class="btn btn-outline-info">サブスクを作る</button></a>
+    </div>
+
     <div class="d-flex flex-wrap">
       <% @services.each do |service|%>
         <% if service.service_status != "deleted" %>

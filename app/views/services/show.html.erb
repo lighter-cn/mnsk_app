@@ -1,6 +1,6 @@
 <div class="main-wrapper container">
-  <div class="service-show content">
-    <h2 class="service-show_title"><%= @service.service_name %></h2>
+  <div class="content">
+    <h3 class="service-show_title"><%= @service.service_name %></h3>
     <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <% count = 0 %>
@@ -23,7 +23,7 @@
             <% else %>
             <div class="carousel-item">
             <% end %>
-              <div class="service-img" style="background-image:url(<%= rails_blob_path(@service.images[count_image]) %>)"></div>
+              <div class="carousel-img" style="background-image:url(<%= rails_blob_path(@service.images[count_image]) %>)"></div>
             </div>
             <% count_image += 1 %>
           <% end %>
@@ -45,7 +45,7 @@
     </div>
   </div>
 
-  <div class="service-button content">
+  <div class="content d-flex justify-content-center">
     <%# ログイン済みなら %>
     <% if user_signed_in? %>
       <%# 出品者なら %>
@@ -56,21 +56,15 @@
         <%# 購入者 %>
         <% if @order != nil %>
           <%= form_with model: @code, url: codes_path(order_id: @order.id,service_id: @service.id), id: 'service-form',method: :post,local: true do |f| %>
-              <div class="field">
-                <%= f.submit 'QRコード発行', class: "std_btn" %>
-              </div>
+              <%= f.submit 'QRコード発行', class: "std_btn" %>
             <% end %>
           <% if (@sub.status == "paused" || @sub.status == "canceled" ) && @service.service_status == "open" %>
             <%= form_with model: @order, url: resume_service_order_path(params[:id],@order.id), id: 'service-form',local: true do |f| %>
-              <div class="field">
-                <%= f.submit '再開', class: "std_btn"  %>
-              </div>
+              <%= f.submit '再開', class: "std_btn"  %>
             <% end %>
           <% elsif @service.service_status == "open" %>
             <%= form_with model: @order, url: pause_service_order_path(params[:id],@order.id), id: 'service-form',local: true do |f| %>
-              <div class="field">
-                <%= f.submit '停止', class: "std_btn"  %>
-              </div>
+              <%= f.submit '停止', class: "std_btn"  %>
             <% end %>
           <% else %>
             <p>
@@ -87,6 +81,8 @@
       <%= link_to "ログイン", new_user_session_path, class: "mnsk-link"%>
       <%= link_to "新規登録", new_user_registration_path, class: "mnsk-link"%>
     <% end %>
+  </div>
+  <div class="content">
     <%= link_to "トップ", root_path, class: "mnsk-link"%>
   </div>
 </div>
