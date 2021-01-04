@@ -5,7 +5,6 @@ class Service < ApplicationRecord
   has_many_attached :images
 
   with_options presence: true do
-    validates :user_id
     validates :service_name, length: { minimum: 10, maximum: 30 }
     validates :service_status
     validates :price,        numericality: { only_integer: true, greater_than_or_equal_to: 100, less_than_or_equal_to: 100_000 }
