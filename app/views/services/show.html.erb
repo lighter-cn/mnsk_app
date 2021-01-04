@@ -84,8 +84,8 @@
         <% end %>
       <% end %>
     <% else %>
-      <a href="/users/sign_up" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-primary">sign up</button></a>
-      <a href="/users/sign_in" rel="nofollow" data-method="get"><button type="button" class="btn btn-outline-success">log in</button></a>
+      <%= link_to "ログイン", new_user_session_path, class: "mnsk-link"%>
+      <%= link_to "新規登録", new_user_registration_path, class: "mnsk-link"%>
     <% end %>
     <%= link_to "トップ", root_path, class: "mnsk-link"%>
   </div>
