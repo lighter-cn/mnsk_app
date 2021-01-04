@@ -12,10 +12,12 @@ class ServicesController < ApplicationController
   end
 
   def show
-    @order = Order.find_by user_id: current_user.id, service_id: params[:id]
-    unless @order.nil? # 購入済みならサブスク情報を持ってくる
-      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-      @sub = Payjp::Subscription.retrieve(@order.subscription)
+    if user_signed_in?
+      @order = Order.find_by user_id: current_user.id, service_id: params[:id]
+      unless @order.nil? # 購入済みならサブスク情報を持ってくる
+        Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+        @sub = Payjp::Subscription.retrieve(@order.subscription)
+      end
     end
   end
 
