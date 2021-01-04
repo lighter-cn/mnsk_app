@@ -27,6 +27,7 @@ class UsersController < ApplicationController
     if @user.update(update_params)
       redirect_to user_path
     else
+      @user = User.find(current_user.id)
       render :edit
     end
   end
