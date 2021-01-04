@@ -2,9 +2,10 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!                      # ログイン状態のチェック
   before_action :pull_service                            # サブスク情報取得
   before_action :pull_user                               # ユーザー情報取得
+  before_action :have_card?, only: [:new, :create]       # カード情報があるかチェック
   before_action :is_owner?                               # サブスク出品者のチェック
   before_action :find_order                              # orderの有無を確認
-  before_action :did_buy?, only: [:new, :create] # 購入済みのリダイレクト
+  before_action :did_buy?, only: [:new, :create]         # 購入済みのリダイレクト
   before_action :is_service_opened?, only: [:new, :create, :pause, :resume] # サブスク停止中かチェック
 
   def new
@@ -12,8 +13,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    redirect_to new_card_path and return unless current_user.card.present? # カード未登録のリダイレクト
-
     sub = Order.create_sub(current_user.card.customer_token, @service.service_id)
 
     if !sub.id.nil?
@@ -61,6 +60,10 @@ class OrdersController < ApplicationController
 
   def find_order
     @order = Order.find_by user_id: current_user.id, service_id: params[:service_id]
+  end
+
+  def have_card?
+    redirect_to new_card_path and return unless current_user.card.present?
   end
 
   def did_buy?
