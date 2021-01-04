@@ -7,9 +7,9 @@ RSpec.describe Service, type: :model do
 
   describe "ユーザー新規登録" do
     # 正常系
-    # it "すべての項目を入力した場合、新規登録できる" do
-    #   expect(@service).to be_valid
-    # end
+    it "すべての項目を入力した場合、新規登録できる" do
+      expect(@service).to be_valid
+    end
     # 異常系
     it "サブスク名を未入力の場合、新規登録できない" do
       @service.service_name = ""
