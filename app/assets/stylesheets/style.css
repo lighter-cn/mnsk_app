@@ -40,7 +40,6 @@ p {font-size: 18px}
 /* link */
 .link {color: #c725c7;}
 .link:hover {color: #06b45d;}
-
 .mnsk-link {
   background-color: #eeeeee;
   color: #07bd62;
@@ -54,9 +53,9 @@ p {font-size: 18px}
   text-decoration: none;
   transition: all, .2s;
 }
-
 .link-wrapper {margin: 20px 0;}
 
+/* contents */
 .main-wrapper {padding: 60px 0 0;}
 .content {
   text-align: center;
@@ -73,6 +72,19 @@ table tr td {
   border: 1px solid #fff;
   line-height: 36px;
 }
+
+/* form */
+.input-text,
+.input-message {
+  width: 100%;
+  max-width: 500px;
+}
+.input-short{
+  width: 200px;
+  height: 30px;
+}
+.input-message {height: 300px;}
+
 
 /* header **************************************/
 header {
@@ -140,7 +152,7 @@ footer {
 }
 
 /* service *************************************/
-/* subscriptions */
+/* card */
 .card {
   border: none;
   margin-bottom: 16px;
@@ -159,58 +171,37 @@ footer {
 }
 
 /* new / edit */
-.service-new .field,
-.service-edit .field {margin-bottom: 30px;}
-#image-list img {
-  max-width: 200px;
-  height: auto;
-}
-.service-images {
-  max-width: 200px;
-  height: auto;
-}
-.blobImage {
+.service-field {margin-bottom: 20px;}
+.service-field p {margin-bottom: 10px;}
+.blob-image {
   width: 100%;
   padding-top: 100%;
   background-size: cover;
   background-position: 50% 50%;
   margin-bottom: 20px;
 }
-.edit-img{
-  width: 100%;
-  padding-top: 100%;
-  background-size: cover;
-  background-position: 50% 50%;
-  margin-bottom: 20px;
-}
+
 /* show */
-.service-show_title {
-  font-size: 24px;
-  width: 90%;
-  margin: 0 auto 20px;
-}
+.service-show_title {font-size: 24px;}
+.service-show_info {margin: 20px auto ;}
+
 .carousel {width: 100%;}
 .carousel-img{
   width: 400px;
   height: 400px;
-  padding-top: 0;
   background-size: cover;
   background-position: 50% 50%;
   margin: 0 auto;
 }
 @media screen and (max-width:576px) { 
   .carousel-img{
-    width: 90%;
+    width: 100%;
     height: 0;
-    padding-top: 90%;
+    padding-top: 100%;
   }
 }
 .carousel-control-next,
 .carousel-control-prev {filter: invert(100%)}
-.service-show_info {  margin: 20px auto ;}
-.service-button input{margin-bottom: 20px;}
-
-/* order ***************************************/
 
 /* error ***************************************/
 .error-title {
@@ -222,5 +213,3 @@ footer {
   color: #770101;
   font-size: 16px;
 }
-
-/* code ****************************************/

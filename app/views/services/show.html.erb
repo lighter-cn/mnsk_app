@@ -38,8 +38,8 @@
       </a>
     </div>
     <div class="service-show_info">
-      <p>カテゴリー：<%= @service.category.name %></p>
-      <p>内容：<%= @service.explanation %></p>
+      <p><span class="badge badge-pill badge-success"><%= @service.category.name %></span></p>
+      <p class="text-left"><%= @service.explanation %></p>
       <p>月額：¥<%= @service.price %></p>
       <p>出品者：<%= @service.user.name %></p>
     </div>

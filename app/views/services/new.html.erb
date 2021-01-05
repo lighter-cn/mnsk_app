@@ -3,32 +3,32 @@
     <h2>サブスク登録</h2>
     <%= render partial: 'shared/error', error: @error unless @error == nil %>
     <%= form_with model: @service, id: 'service-form',local: true do |f| %>
-      <div class="field">
+      <div class="service-field">
         <p>サービス名</p>
-        <%= f.text_field :service_name ,placeholder: "10字〜30字で入力してください" %><br>
+        <%= f.text_field :service_name ,class: "input-text",placeholder: "10字〜30字で入力してください" %><br>
       </div>
 
-      <div class="field">
+      <div class="service-field">
         <p>説明文</p>
-        <%= f.text_area :explanation, placeholder: "30字〜300字で入力してください" %><br>
+        <%= f.text_area :explanation, class: "input-message", placeholder: "30字〜300字で入力してください" %><br>
       </div>
 
-      <div class="field">
-        <p>料金（月額）¥100〜¥100,000で指定</p>
-        <%= f.number_field :price , in: 100..100000 %><br>
+      <div class="service-field">
+        <p>月額(¥100〜¥100,000)</p>
+        <%= f.number_field :price , class: "input-short", in: 100..100000 %><br>
       </div>
 
-      <div class="field">
+      <div class="service-field">
         <p>カテゴリー</p>
-        <%= f.collection_select(:category_id, Category.all, :id, :name, {} , {class:"category-select"}) %><br>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, {} , {class:"input-short"}) %><br>
       </div>
 
-      <div class="field" id="img-up">
+      <div class="service-field" id="img-up">
         <p>画像</p>
         <%= f.file_field :images, name: 'service[images][]', id: 'service_image_0' %>
       </div>
-      <div id="image-list" class="d-flex flex-wrap justify-content-center"></div>
-      <div class="field">
+      <div id="image-list" class="d-flex flex-wrap service-field"></div>
+      <div class="service-field">
         <%= f.submit '作成', class: "std_btn" %>
       </div>
 

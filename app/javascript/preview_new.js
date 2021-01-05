@@ -8,14 +8,13 @@ if (document.URL.match( /services/ )&&document.URL.match( /new/ )) {
        // 画像を表示するためのdiv要素を生成
       const img_up = document.getElementById('img-up');
       const imageElement = document.createElement('div');
-      imageElement.setAttribute('class', "image-element col-4 col-lg-3 col-xl-2");
+      imageElement.setAttribute('class', "image-element col-6 col-md-3 col-xl-2 mb-4");
       imageElement.setAttribute('id', `image-element_${number}`);
 
       // 表示する画像を生成
       const blobImage = document.createElement('div');
-      blobImage.setAttribute('class','blobImage');
+      blobImage.setAttribute('class','blob-image');
       blobImage.style.backgroundImage = `url(${blob})`;
-      // blobImage.setAttribute('src', blob);
 
       // ファイル選択ボタンを生成
       const inputHTML = document.createElement('input')
