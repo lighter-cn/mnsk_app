@@ -3,54 +3,54 @@
     <h2>登録情報更新</h2>
     <%= render partial: 'shared/error', error: @error unless @error == nil %>
     <%= form_with model: @service, id: 'service-form',local: true do |f| %>
-      <div class="field">
+      <div class="service-field">
         <p>サービス名</p>
-        <%= f.text_field :service_name %><br>
+        <%= f.text_field :service_name ,class: "input-text"%><br>
       </div>
 
-      <div class="field">
+      <div class="service-field">
         <p>ステータス：<%= @service.service_status %></p>
       </div>
 
-      <div class="field">
+      <div class="service-field">
         <p>説明文</p>
-        <%= f.text_field :explanation %><br>
+        <%= f.text_area :explanation,class: "input-message" %><br>
       </div>
 
-      <div class="field">
+      <div class="service-field">
         <p>料金（月額）</p>
         <p>¥<%= @service.price %></p>
       </div>
 
-      <div class="field">
+      <div class="service-field">
         <p>カテゴリー</p>
-        <%= f.collection_select(:category_id, Category.all, :id, :name, {} , {class:"category-select"}) %><br>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, {} , {class:"input-short"}) %><br>
       </div>
 
-      <div id="image-list" class="d-flex flex-wrap justify-content-center">
+      <div id="image-list" class="d-flex flex-wrap service-field">
         <% @service.images.each_with_index do |image,i| %>
-          <div class="edit-img-wrapper col-4 col-lg-3 col-xl-2">
-            <div class="edit-img" style="background-image:url(<%= rails_blob_path(@service.images[i]) %>)"></div>
+          <div class="col-6 col-md-3 col-xl-2">
+            <div class="blob-image" style="background-image:url(<%= rails_blob_path(@service.images[i]) %>)"></div>
           </div>
         <% end %>
       </div>
 
 
-      <div class="field">
+      <div class="service-field">
         <%= f.submit '更新' %>
       </div>
     <% end %>
 
       <% if @service.service_status == "open" %>
         <%= form_with model: @service, id: 'service-form', method: :delete,local: true do |f| %>
-          <div class="field">
+          <div class="service-field">
             <p>利用期限内のお客様が一人もいらっしゃらなければ削除できます。</p>
             <%= f.submit '削除', class: "std_btn"  %>
           </div>
         <% end %>
 
         <%= form_with model: @service, url: pause_service_path(params[:id]), id: 'service-form',local: true do |f| %>
-          <div class="field">
+          <div class="service-field">
             <p>サービスを停止し、現在登録しているお客様すべての更新を停止します。</p>
             <%= f.submit '停止', class: "std_btn"  %>
           </div>
