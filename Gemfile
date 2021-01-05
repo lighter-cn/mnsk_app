@@ -68,3 +68,4 @@ gem 'rqrcode'
 gem 'chunky_png', '~> 1.3', '>= 1.3.5'
 gem 'kaminari', '~> 0.17.0'
 gem 'ransack'
+gem "aws-sdk-s3", require: false
