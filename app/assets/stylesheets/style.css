@@ -152,7 +152,6 @@ footer {
 }
 
 /* service *************************************/
-/* card */
 .card {
   border: none;
   margin-bottom: 16px;
@@ -169,8 +168,6 @@ footer {
   font-size: 16px;
   margin-top: 10px;
 }
-
-/* new / edit */
 .service-field {margin-bottom: 20px;}
 .service-field p {margin-bottom: 10px;}
 .blob-image {
@@ -180,11 +177,8 @@ footer {
   background-position: 50% 50%;
   margin-bottom: 20px;
 }
-
-/* show */
 .service-show_title {font-size: 24px;}
 .service-show_info {margin: 20px auto ;}
-
 .carousel {width: 100%;}
 .carousel-img{
   width: 400px;
@@ -202,6 +196,13 @@ footer {
 }
 .carousel-control-next,
 .carousel-control-prev {filter: invert(100%)}
+.search-form{margin-bottom: 10px}
+.search-form input,
+.search-form select {
+  border: 1px solid rgb(168, 168, 168);
+  width: 240px;
+}
+
 
 /* error ***************************************/
 .error-title {
