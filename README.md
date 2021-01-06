@@ -132,3 +132,32 @@ http://54.250.177.45/
 ## ER図
 ![mnsk_er](https://user-images.githubusercontent.com/54133131/103738291-2048d700-5037-11eb-9e29-2f5af8c683c1.png)
 
+## cloneしてローカルで確認する手順
+### 手順
+1. git clone https://github.com/lighter-cn/mnsk_app.git
+2. cd コピー先のディレクトリ
+3. bundle install
+4. yarn install 
+5. rails db:create
+6. rails db:migrate
+7. 環境変数の設定
+8. rails s
+
+### 環境変数
+以下の環境変数を設定してください
+- BASIC_AUTH_PASSWORD  
+- BASIC_AUTH_USER  
+- PAYJP_PUBLIC_KEY(こちらは外部APIの公開鍵になります)
+- PAYJP_SECRET_KEY(こちらは外部APIの秘密鍵になります)
+
+外部APIの公開鍵と秘密鍵は以下のURLより登録後取得できます。  
+https://pay.jp/
+
+
+### 動作環境
+- ruby 2.6.5p114 (2019-10-01 revision 67812) [x86_64-darwin18]  
+- Rails 6.0.3.4
+- mysql  Ver 14.14 Distrib 5.6.50, for osx10.14 (x86_64)
+
+以上
+
