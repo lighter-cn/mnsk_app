@@ -1,90 +1,69 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## アプリケーション名
 
-Things you may want to cover:
+MNSK(みんなのサブスク)
 
-* Ruby version
-* System dependencies
-* Configuration
-* Database creation
-* Database initialization
-* How to run the test suite
-* Services (job queues, cache servers, search engines, etc.)
-* Deployment instructions
-* ...
+## 概要
 
-# テーブル設計
+個人でサブスクリプションを出品することや購入することができるサービスです。
+出品者は購入者をQRコードを用いて判別する事ができます。
+QRコードは購入者の端末の画面に表示され、そのQRコードを出品者が読み取ることで購入者かどうか確認することができます。
+QRコードの期限は発行から24時間以内で、一度使用すると再度同じものを利用することができません。
+また、未使用か使用済みかに関わらず、前回の発行から24時間以上経過した場合、再発行することができます。
 
-## users テーブル
+## 目指した課題解決
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| name               | string | null: false |
-| birthday           | date   | null: false |
+近年電子マネー化やサービスのサブスクリプション化が行われる中、
+小規模の企業や店舗が簡単にデジタル化を行えることで機会損失を防いだり、
+個人で副業を行うための活動の場を提供したいと思い、このアプリケーションを作りました。
 
-### Association
+## URL
 
-- has_many :services
-- has_many :orders
-- has_one :card
+http://54.250.177.45/
 
-## services テーブル
+## テスト用アカウント
 
-| Column         | Type       | Options                        |
-| -------------- | ---------- |------------------------------- |
-| service_name   | string     | null: false                    |
-| price          | integer    | null: false                    |
-| explanation    | text       | null: false                    |
-| service_status | string     | null: false                    |
-| service_id     | text       | null: false                    |
-| category_id    | integer    | null: false                    |
-| user           | references | null: false, foreign_key: true |
+email: foo@foo
+password: foofoo
 
-### Association
+*Basic認証あり
 
-- belongs_to :user
-- has_many :orders
-- has_many_attached :images
-- belongs_to :category
+## 機能
 
-## orders テーブル
+- ユーザー関連
+  - ユーザー登録機能
+  - ユーザー情報更新
+  - ユーザー情報一覧機能
+  - クレジットカード登録機能
+  - ログイン / ログアウト機能
+- サブスクリプション関連
+  - 作成機能
+  - 更新機能
+  - 削除機能
+  - 停止機能
+  - 購入機能
+  - 購入停止 / 再開機能
+- QRコード関連
+  - QRコード発行機能
+  - QRコード確認機能
+  - QRコード更新機能
 
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| user         | references | null: false, foreign_key: true |
-| service      | references | null: false, foreign_key: true |
-| subscription | text       | null: false                    |
+## 利用方法
 
-### Association
+## 実装予定の機能
 
-- belongs_to :user
-- belongs_to :service
-- has_many    :codes
+- コミュニケーション関連
+  - サブスクリプションの評価機能
+  - コメント機能
+  - 出品者の情報一覧
+- 検索の強化
+  - 金額帯の指定による絞り込み
+  - タグ付け機能とタグによる絞り込み
+  - 評価の高い順でのソート
+  - ランキング機能
+- サブスクリプション関係
+  - 一出品者あたりの出品上限の設置と、上限数開放のためのプレミアム会員機能
+  - 一日に利用できるQRコードの回数の指定
 
-## codes テーブル
-
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| code   | string     | null: false                    |
-| status | string     | null: false                    |
-| order  | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :order
-
-## cards テーブル
-
-| Column         | Type       | Options                        |
-| -------------- | ---------- | ------------------------------ |
-| customer_token | string     | null: false                    |
-| card_token     | string     | null: false                    |
-| user           | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :order
+# ER図
