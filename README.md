@@ -130,5 +130,5 @@ http://54.250.177.45/
   - 一日に利用できるQRコードの回数の指定
 
 ## ER図
-![ER image](https://gyazo.com/97cf2205d4041e0aee0c719a3f5943f3)
+![mnsk_er](https://user-images.githubusercontent.com/54133131/103738291-2048d700-5037-11eb-9e29-2f5af8c683c1.png)
 
