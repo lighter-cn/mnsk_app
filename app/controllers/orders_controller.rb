@@ -44,6 +44,28 @@ class OrdersController < ApplicationController
     @error << e.message
   end
 
+  def good
+    order = Order.find(params[:id])
+    if order.good
+      order.update(good: false)
+    else
+      order.update(good: true)
+    end
+    order = Order.find(params[:id])
+    render json: {order: order}
+  end
+
+  def bad
+    order = Order.find(params[:id])
+    if order.bad
+      order.update(bad: false)
+    else
+      order.update(bad: true)
+    end
+    order = Order.find(params[:id])
+    render json: {order: order}
+  end
+
   private
 
   def pull_service
