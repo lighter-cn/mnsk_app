@@ -42,6 +42,9 @@ p {font-size: 18px}
 .good i{color: #0d63e6;}
 .bad i{color: #fd944e;}
 
+.good[data-check="true"] i,
+.bad[data-check="true"] i{color: #8f8f8f;}
+
 /* link */
 .link {color: #c725c7;}
 .link:hover {color: #06b45d;}
