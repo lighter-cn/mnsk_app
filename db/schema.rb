@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 2020_12_23_095233) do
     t.bigint "user_id", null: false
     t.bigint "service_id", null: false
     t.text "subscription", null: false
+    t.boolean "good", default: false, null: false
+    t.boolean "bad", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["service_id"], name: "index_orders_on_service_id"
