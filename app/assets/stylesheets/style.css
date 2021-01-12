@@ -34,7 +34,13 @@ p {font-size: 18px}
   background-color: #05a728;
   color: rgb(247, 247, 247);
 }
-.std_btn:hover{background-color: #06741e}
+.std_btn:hover{background-color: #062974}
+.good,
+.bad {
+  padding: 0 10px;
+}
+.good i{color: #0d63e6;}
+.bad i{color: #fd944e;}
 
 /* link */
 .link {color: #c725c7;}

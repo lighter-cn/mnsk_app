@@ -42,6 +42,12 @@
       <p class="text-left"><%= @service.explanation %></p>
       <p>月額：¥<%= @service.price.to_s(:delimited) %></p>
       <p>出品者：<%= @service.user.name %></p>
+      <% if @order != nil %>
+        <div class="d-flex justify-content-center">
+          <div id="good" class="good"><i class="fas fa-thumbs-up fa-2x"></i></div>
+          <div id="bad" class="bad"><i class="fas fa-thumbs-down fa-2x"></i></div>
+        </div>
+      <% end %>
     </div>
   </div>
 
