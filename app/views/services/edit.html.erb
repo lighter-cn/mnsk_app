@@ -19,7 +19,7 @@
 
       <div class="service-field">
         <p>料金（月額）</p>
-        <p>¥<%= @service.price %></p>
+        <p>¥<%= @service.price.to_s(:delimited) %></p>
       </div>
 
       <div class="service-field">

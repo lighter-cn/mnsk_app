@@ -6,7 +6,7 @@
   </a>
   <div class="card-body">
     <span class="badge badge-pill badge-success"><%= service.category.name %></span>
-    <span class="badge badge-pill badge-warning">¥<%= service.price %></span>
+    <span class="badge badge-pill badge-warning">¥<%= service.price.to_s(:delimited) %></span>
     <h5 class="card-title"><%= service.service_name %></h5>
   </div>
 </div>
