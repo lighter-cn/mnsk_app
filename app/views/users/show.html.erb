@@ -1,4 +1,5 @@
 <div class="container main-wrapper">
+  <% if current_user.id == @user.id %>
     <div class="content">
       <h2>ユーザー情報</h2>
       <table>
@@ -78,6 +79,40 @@
         </table>
       </div>
     <% end %>
+  <% else %>
+    <div class="content">
+      <h2>ユーザー情報</h2>
+      <table>
+        <tr>
+          <td>お名前</td>
+          <td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <td>メールアドレス</td>
+          <td><%= @user.email %></td>
+        </tr>
+      </table>
+    </div>
+
+    <%# 出品中のサブスク情報 %>
+    <% if @services.length > 0 %>
+      <div class="content">
+        <h3>出品中のサブスク一覧</h3>
+        <table class="users-table">
+          <tr>
+            <td>サービス名</td>
+            <td>購入者数</td>
+          </tr>
+          <% @services.each do |service| %>
+            <tr>
+              <td><%= link_to service[:name], service_path(service[:id]),class: "link" %></td>
+              <td><%= service[:num].length %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    <% end %>
+  <% end %>
 
     <div class="content">
       <div class="link-wrapper">
