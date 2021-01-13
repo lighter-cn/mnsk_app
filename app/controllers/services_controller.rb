@@ -9,6 +9,13 @@ class ServicesController < ApplicationController
 
   def index
     @services = Service.order('created_at DESC').take(8)
+
+    @goods = []
+    @bads =[]
+    @services.each do |service|
+      @goods << Order.where('service_id=?',service.id).where('good',true).count;
+      @bads << Order.where('service_id=?',service.id).where('bad',true).count;
+    end
   end
 
   def show
@@ -28,6 +35,13 @@ class ServicesController < ApplicationController
     params[:q][:category_id_eq] = '' if !params[:q].nil? && (params[:q][:category_id_eq] == '1')
     @q = Service.ransack(params[:q])
     @services = @q.result(distinct: true).page(params[:page]).per(PER)
+
+    @goods = []
+    @bads =[]
+    @services.each do |service|
+      @goods << Order.where('service_id=?',service.id).where('good',true).count;
+      @bads << Order.where('service_id=?',service.id).where('bad',true).count;
+    end
   end
 
   def new

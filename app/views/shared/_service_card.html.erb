@@ -8,5 +8,9 @@
     <span class="badge badge-pill badge-success"><%= service.category.name %></span>
     <span class="badge badge-pill badge-warning">¥<%= service.price.to_s(:delimited) %></span>
     <h5 class="card-title"><%= service.service_name %></h5>
+    <div class="d-flex justify-content-center align-items-center card-thumbs">
+      <span><%= good %></span><i class="thumbs-up fas fa-thumbs-up fa-lg"></i>
+      <span><%= bad %></span><i class="thumbs-down fas fa-thumbs-down fa-lg"></i>
+    </div>
   </div>
 </div>

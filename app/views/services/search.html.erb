@@ -27,10 +27,10 @@
     </div>
 
     <div class="d-flex flex-wrap">
-      <% @services.each do |service|%>
+      <% @services.each_with_index do |service,i|%>
         <% if service.service_status != "deleted" %>
           <!-- card -->
-          <%= render partial: "/shared/service_card", locals: { service: service } %>
+          <%= render partial: "/shared/service_card", locals: { service: service ,good: @goods[i],bad: @bads[i]} %>
         <% end %>
       <% end %>
     </div>
