@@ -34,7 +34,22 @@ p {font-size: 18px}
   background-color: #05a728;
   color: rgb(247, 247, 247);
 }
-.std_btn:hover{background-color: #06741e}
+.std_btn:hover{background-color: #062974}
+.good,
+.bad {
+  padding: 0 10px;
+}
+.good i{color: #0d63e6;}
+.bad i{color: #fd944e;}
+
+.good[data-check="true"] i,
+.bad[data-check="true"] i{color: #8f8f8f;}
+
+.good span,
+.bad span{
+  font-size: 18px;
+  padding-right: 10px;
+}
 
 /* link */
 .link {color: #c725c7;}
@@ -167,6 +182,16 @@ footer {
   font-size: 16px;
   margin-top: 10px;
 }
+.card-thumbs span{
+  font-size: 18px;
+  margin-right: 10px;
+}
+.card-thumbs i{
+  padding: 0 10px;
+}
+.thumbs-up{color: #0d63e6;}
+.thumbs-down{color: #fd944e;}
+
 .service-field {margin-bottom: 20px;}
 .service-field p {margin-bottom: 10px;}
 .blob-image {

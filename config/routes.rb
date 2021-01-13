@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       member do
         patch :pause
         patch :resume
+        get :good
+        get :bad
       end
     end
   end

@@ -10,6 +10,8 @@ require("channels")
 require("../card")
 require("../preview")
 require("../preview_new")
+require("../good")
+require("../bad")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
