@@ -17,6 +17,9 @@ class ServicesController < ApplicationController
       unless @order.nil? # 購入済みならサブスク情報を持ってくる
         Payjp.api_key = ENV['PAYJP_SECRET_KEY']
         @sub = Payjp::Subscription.retrieve(@order.subscription)
+        # select count(orders.id) from orders inner join services on services.id=orders.service_id where orders.service_id = 6 and orders.good
+        @good = Order.where('service_id=?',params[:id]).where('good',true).count;
+        @bad = Order.where('service_id=?',params[:id]).where('bad',true).count;
       end
     end
   end

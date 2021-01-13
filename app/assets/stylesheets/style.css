@@ -45,6 +45,12 @@ p {font-size: 18px}
 .good[data-check="true"] i,
 .bad[data-check="true"] i{color: #8f8f8f;}
 
+.good span,
+.bad span{
+  font-size: 18px;
+  padding-right: 10px;
+}
+
 /* link */
 .link {color: #c725c7;}
 .link:hover {color: #06b45d;}
