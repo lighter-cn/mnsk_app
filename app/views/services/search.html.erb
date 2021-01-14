@@ -12,6 +12,14 @@
             <%= f.label :category_id_eq, "カテゴリー" %><br>
             <%= f.collection_select(:category_id_eq , Category.all, :id, :name, {},{}) %>
           </div>
+          <%# 希望金額 %>
+          <div class="search-form">
+            <span>価格</span>
+            <div class="price-field d-flex justify-content-between">
+              <%= f.number_field :price_gteq, placeholder: "下限料金" %>〜
+              <%= f.number_field :price_lteq, placeholder: "上限料金" %>
+            </div>
+          </div>
         </div>
         <div class="link-wrapper ml-sm-5">
           <%= f.submit "検索", class: "std_btn" %>
