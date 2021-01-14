@@ -2,28 +2,33 @@ class UsersController < ApplicationController
   before_action :authenticate_user! # ログイン状態の確認
   before_action :pull_user, only: [:show, :edit, :update]
   def show
-    # カード情報取得
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-    card = Card.find_by(user_id: current_user.id)
+    @owner = User.find(params[:id])
+    if @owner == @user
+      # カード情報取得
+      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+      card = Card.find_by(user_id: @user.id)
 
-    if card.present?
-      customer = Payjp::Customer.retrieve(card.customer_token)
-      @card = customer.cards.first
-    else
-      @card = nil
+      if card.present?
+        customer = Payjp::Customer.retrieve(card.customer_token)
+        @card = customer.cards.first
+      else
+        @card = nil
+      end
+      @orders = Order.getBuyOrders(@user.id)
     end
 
-    # サービス取得
-    @services = Service.getServiceUserCount(@user.id)
+    @services = Service.getServiceUserCount(@owner.id)
 
-    # オーダー取得
-    @orders = Order.getBuyOrders(@user.id)
+
   end
 
   def edit
+    redirect_to user_path unless current_user.id == @user.id
   end
 
   def update
+    redirect_to user_path unless current_user.id == @user.id
+    
     if @user.update(update_params)
       redirect_to user_path
     else
