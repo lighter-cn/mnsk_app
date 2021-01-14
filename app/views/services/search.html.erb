@@ -13,6 +13,12 @@
             <%= f.collection_select(:category_id_eq , Category.all, :id, :name, {},{}) %>
           </div>
         </div>
+        <%# 希望金額 %>
+        <div class="search-form">
+          <%= f.search_field :price_gteq, placeholder: "下限" %>〜
+          <%= f.search_field :price_lteq, placeholder: "上限" %>
+        </div>
+
         <div class="link-wrapper ml-sm-5">
           <%= f.submit "検索", class: "std_btn" %>
         </div>
