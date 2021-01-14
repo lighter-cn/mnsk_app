@@ -1,5 +1,5 @@
 <div class="container main-wrapper">
-  <% if current_user.id == @user.id %>
+  <% if @user == @owner %>
     <div class="content">
       <h2>ユーザー情報</h2>
       <table>
@@ -85,11 +85,11 @@
       <table>
         <tr>
           <td>お名前</td>
-          <td><%= @user.name %></td>
+          <td><%= @owner.name %></td>
         </tr>
         <tr>
           <td>メールアドレス</td>
-          <td><%= @user.email %></td>
+          <td><%= @owner.email %></td>
         </tr>
       </table>
     </div>

@@ -2,27 +2,24 @@ class UsersController < ApplicationController
   before_action :authenticate_user! # ログイン状態の確認
   before_action :pull_user, only: [:show, :edit, :update]
   def show
-    # 本人確認
-    if current_user.id == @user.id
+    @owner = User.find(params[:id])
+    if @owner == @user
       # カード情報取得
       Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       card = Card.find_by(user_id: @user.id)
-  
+
       if card.present?
         customer = Payjp::Customer.retrieve(card.customer_token)
         @card = customer.cards.first
       else
         @card = nil
       end
-  
-      # サービス取得
-      @services = Service.getServiceUserCount(@user.id)
-  
-      # オーダー取得
       @orders = Order.getBuyOrders(@user.id)
-    else 
-      @services = Service.getServiceUserCount(@user.id)
     end
+
+    @services = Service.getServiceUserCount(@owner.id)
+
+
   end
 
   def edit
@@ -43,7 +40,7 @@ class UsersController < ApplicationController
   private
 
   def pull_user
-    @user = User.find(params[:id]) if user_signed_in?
+    @user = User.find(current_user.id) if user_signed_in?
   end
 
   def update_params
