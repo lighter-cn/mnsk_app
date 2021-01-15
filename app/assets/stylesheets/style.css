@@ -17,6 +17,12 @@ h3 {
 @media screen and (max-width:576px) { 
   h3 { font-size: 24px}
 }
+h4 {
+  font-size: 28px;
+}
+@media screen and (max-width:576px) { 
+  h4 { font-size: 20px}
+}
 p {font-size: 18px}
 @media screen and (max-width:576px) { 
   p { font-size: 14px}
@@ -223,7 +229,7 @@ footer {
 .search-form{margin-bottom: 10px}
 .search-form input,
 .search-form select {
-  border: 1px solid rgb(168, 168, 168);
+  border: 1px solid #a8a8a8;
   width: 240px;
 }
 .price-field {
@@ -233,6 +239,21 @@ footer {
 .price-field input {
   width: 100px;
   text-align: center;
+}
+
+.help {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.help h4{
+  text-align-last: left;
+  padding: 8px 18px;
+  background-color: #c3fcdf
+}
+.help p {
+  text-align-last: left;
+  padding: 0 28px;
+  margin-bottom: 24px;
 }
 
 
