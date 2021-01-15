@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
     collection do
       get 'search'
+      get 'help'
     end
     resources :orders, only: [:new, :create] do
       member do

@@ -1,8 +1,8 @@
 class ServicesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :search]
+  before_action :authenticate_user!, except: [:index, :show, :search, :help]
   before_action :pull_user
-  before_action :pull_service,       except: [:index, :new, :create, :search]
-  before_action :is_owner?,          except: [:index, :show, :new, :create, :search]
+  before_action :pull_service,       except: [:index, :new, :create, :search, :help]
+  before_action :is_owner?,          except: [:index, :show, :new, :create, :search, :help]
   before_action :register_card?,     only: [:new, :create]
 
   PER = 20 # ページネーションの1ページあたりの表示項目数
@@ -100,6 +100,10 @@ class ServicesController < ApplicationController
   def resume
     @service.resume
     redirect_to edit_service_path(params[:id])
+  end
+
+  def help
+    
   end
 
   private
