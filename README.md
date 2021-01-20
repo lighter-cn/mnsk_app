@@ -146,6 +146,10 @@ http://54.250.177.45/
 ## ER図
 ![mnsk_er](https://user-images.githubusercontent.com/54133131/103738291-2048d700-5037-11eb-9e29-2f5af8c683c1.png)
 
+## テストケース
+
+[issue 59](https://github.com/lighter-cn/mnsk_app/issues/59)
+
 ## cloneしてローカルで確認する手順
 ### 手順
 1. git clone https://github.com/lighter-cn/mnsk_app.git
