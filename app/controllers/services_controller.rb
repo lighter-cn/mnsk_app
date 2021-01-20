@@ -11,10 +11,10 @@ class ServicesController < ApplicationController
     @services = Service.order('created_at DESC').take(8)
 
     @goods = []
-    @bads =[]
+    @bads = []
     @services.each do |service|
-      @goods << Order.where('service_id=?',service.id).where('good',true).count;
-      @bads << Order.where('service_id=?',service.id).where('bad',true).count;
+      @goods << Order.where('service_id=?', service.id).where('good', true).count
+      @bads << Order.where('service_id=?', service.id).where('bad', true).count
     end
   end
 
@@ -25,8 +25,8 @@ class ServicesController < ApplicationController
         Payjp.api_key = ENV['PAYJP_SECRET_KEY']
         @sub = Payjp::Subscription.retrieve(@order.subscription)
         # select count(orders.id) from orders inner join services on services.id=orders.service_id where orders.service_id = 6 and orders.good
-        @good = Order.where('service_id=?',params[:id]).where('good',true).count;
-        @bad = Order.where('service_id=?',params[:id]).where('bad',true).count;
+        @good = Order.where('service_id=?', params[:id]).where('good', true).count
+        @bad = Order.where('service_id=?', params[:id]).where('bad', true).count
       end
     end
   end
@@ -37,10 +37,10 @@ class ServicesController < ApplicationController
     @services = @q.result(distinct: true).page(params[:page]).per(PER)
 
     @goods = []
-    @bads =[]
+    @bads = []
     @services.each do |service|
-      @goods << Order.where('service_id=?',service.id).where('good',true).count;
-      @bads << Order.where('service_id=?',service.id).where('bad',true).count;
+      @goods << Order.where('service_id=?', service.id).where('good', true).count
+      @bads << Order.where('service_id=?', service.id).where('bad', true).count
     end
   end
 
@@ -103,7 +103,6 @@ class ServicesController < ApplicationController
   end
 
   def help
-    
   end
 
   private

@@ -18,8 +18,6 @@ class UsersController < ApplicationController
     end
 
     @services = Service.getServiceUserCount(@owner.id)
-
-
   end
 
   def edit
@@ -28,7 +26,7 @@ class UsersController < ApplicationController
 
   def update
     redirect_to user_path unless current_user.id == @user.id
-    
+
     if @user.update(update_params)
       redirect_to user_path
     else

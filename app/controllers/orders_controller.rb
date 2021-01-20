@@ -52,7 +52,7 @@ class OrdersController < ApplicationController
       order.update(good: true)
     end
     order = Order.find(params[:id])
-    render json: {order: order}
+    render json: { order: order }
   end
 
   def bad
@@ -63,7 +63,7 @@ class OrdersController < ApplicationController
       order.update(bad: true)
     end
     order = Order.find(params[:id])
-    render json: {order: order}
+    render json: { order: order }
   end
 
   private
